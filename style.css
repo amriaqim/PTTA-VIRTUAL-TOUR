@@ -1,0 +1,883 @@
+/* ==========================================
+   1. GLOBAL & BASE STYLES
+   ========================================== */
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding-top: 80px; }
+a { text-decoration: none; color: inherit; }
+h1 { text-align: center; margin-bottom: 30px; font-size: 60px; color: White; }
+h2 { text-align: center; margin-bottom: 30px; font-size: 40px; color: #1e3a8a; }
+h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; font-weight: 900; }
+/* ==========================================
+   CAROUSEL SECTION
+   ========================================== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Anda boleh adjust tinggi ikut kesesuaian */
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: none; /* Sorok semua slide secara default */
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide img, .carousel-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tunjukkan slide yang aktif */
+.active-slide {
+    display: block;
+}
+
+/* Gaya butang */
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-next { right: 0; }
+.carousel-prev { left: 0; }
+
+/* Container untuk titik */
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 20;
+}
+
+/* Gaya asal titik */
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.5); /* Warna kelabu lutsinar */
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Gaya bila titik aktif (warna ungu/biru seperti UTHM) */
+.dot.active {
+    background-color: #6366f1; /* Warna aktif */
+    width: 25px; /* Jadikan sedikit panjang untuk efek moden */
+    border-radius: 10px;
+}
+
+
+/* ==========================================
+   2. NAVIGATION & HEADER
+   ========================================== */
+/* 1. Pastikan main-nav menggunakan space-between atau flex yang seimbang */
+.main-nav {
+    display: flex;
+    justify-content:间-between; /* Ini akan menolak logo ke kiri dan nav-center ke tengah */
+    align-items: center;
+    padding: 0 50px; /* Jarak kiri kanan */
+    height: 80px;
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 2. Gunakan flex: 1 pada nav-left dan buat satu div kosong (dummy) jika perlu, 
+      ATAU cara paling senang: */
+
+.nav-left {
+    width: auto; /* Ikut saiz logo sahaja, tak stretch */
+    flex-shrink: 0;
+}
+
+.nav-center {
+    flex: 2; /* Memberi ruang lebih besar supaya ia boleh berada di tengah */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Tambah ini jika anda mahu nav-center betul-betul 'dead center' 
+   walaupun butang kanan sudah dibuang */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.main-nav.scrolled {
+    background: rgba(255, 255, 255, 0.7); /* 0.7 adalah tahap lutsinar */
+    backdrop-filter: blur(10px); /* INI "RAHSIA" DIA: Blur belakang supaya tulisan tetap jelas */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.1); /* Tambah border halus supaya nampak elegan */
+}
+
+.nav-logo { height: 80px; width: auto; display: block; }
+
+.nav-center { display: flex; gap: 40px; font-size: 28px; font-weight: 600; font-family: 'Poppins', sans-serif; }
+.nav-center a { color: #004080; transition: color 0.3s ease; padding-bottom: 5px; border-bottom: 2px solid transparent; }
+.nav-center a:hover { color: #e11d48; }
+.nav-center a.active { color: #e11d48; font-weight: bold; border-bottom: 2px solid #e11d48; }
+
+.hero-banner { 
+    text-align: center; 
+    padding: 80px 20px; 
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply; 
+    background-color: rgba(30, 58, 138, 0.85); 
+	h2 { text-align: center; margin-bottom: 30px; font-size: 40px; color: white; }
+
+}
+/* --- Dropdown Menu Styles --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none; /* Sorok menu secara default */
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1100;
+    top: 100%; /* Muncul tepat di bawah menu utama */
+}
+
+.dropdown-content a {
+    color: #004080;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px; /* Kecilkan sikit dari font menu utama (28px) */
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #e11d48;
+}
+
+/* Tunjukkan menu bila hover pada perkataan Levels */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Tambah jarak sikit supaya tak terputus bila nak gerakkan mouse ke bawah */
+.dropdown .dropbtn {
+    cursor: pointer;
+}
+
+/* ==========================================
+   3. UI COMPONENTS (Buttons, Cards, Footer)
+   ========================================== */
+.login-btn { display: inline-block; padding: 8px 16px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; transition: background-color 0.3s ease; }
+.login-btn:hover { background-color: #e11d48; }
+
+.btn-primary { background: #e11d48; color: white; border: none; padding: 15px 30px; cursor: pointer; margin-top: 20px; border-radius: 5px; }
+
+footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    align-items: start;
+}
+
+/* Brand / Logo column */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+.footer-logo-img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+}
+.footer-brand-info p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+.footer-brand-info a { color: #93c5fd; }
+.footer-brand-info strong { color: #e2e8f0; font-size: 14px; }
+
+/* Link columns */
+.footer-col h4 {
+    color: #f87171;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+.footer-col ul li a {
+    color: #94a3b8;
+    font-size: 13px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.footer-col ul li a::before {
+    content: '◈';
+    color: #3b5bdb;
+    font-size: 10px;
+}
+.footer-col ul li a:hover { color: #f87171; }
+
+/* Social column - Font Awesome icons */
+.footer-social-col ul li a i {
+    width: 18px;
+    text-align: center;
+    font-size: 15px;
+    color: #6366f1;
+    transition: color 0.2s;
+}
+.footer-social-col ul li a:hover i { color: #f87171; }
+
+/* Bottom bar */
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.footer-bottom-links a {
+    color: #64748b;
+    margin: 0 4px;
+    font-size: 12px;
+    transition: color 0.2s;
+}
+.footer-bottom-links a:hover { color: #f87171; }
+
+/* ==========================================
+   4. PAGES: HOME & FLOOR CARDS
+   ========================================== */
+.floor-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 40px 5%; }
+.floor-card { position: relative; height: 250px; overflow: hidden; border-radius: 8px; }
+.floor-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.floor-card:hover img { transform: scale(1.15); }
+.overlay { position: absolute; bottom: 20px; left: 20px; color: white; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 40px 5%; }
+.feature-box { background: white; padding: 30px; border-radius: 10px; transition: all 0.3s ease; text-align: center; font-size: 20px; color: #0f172a; border: 2px solid transparent; }
+.feature-box:hover { box-shadow: 0 0 25px rgba(225, 29, 72, 0.3); border-color: #e11d48; }
+
+/* Gaya untuk bilik yang dipilih di sidebar */
+.room-item-card.active {
+    background-color: #004080;
+    color: white;
+    border-color: #004080;
+    font-weight: bold;
+}
+
+/* Gaya untuk gambar kenit (thumbnail) yang dipilih */
+.thumb-card.active {
+    border: 3px solid #e11d48; /* Warna merah highlight */
+    transform: scale(1.05); /* Besarkan sedikit */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+/* ==========================================
+   5. PAGES: 360 TOUR
+   ========================================== */
+.tour-main-wrapper { 
+    display: flex; padding: 40px 5% 50px 5%; gap: 30px; align-items: flex-start; min-height: 700px; 
+}
+
+.sidebar-list { 
+    flex: 0 0 220px; height: 600px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center;
+}
+.room-item-card { 
+    padding: 15px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 8px; cursor: pointer; background: white; transition: 0.3s;
+}
+.room-item-card:hover { border-color: #1e3a8a; }
+.room-item-card.active { background: #1e3a8a; color: white; }
+
+.viewer-content { flex: 3; }
+.viewer-video-box { background: #000; overflow: hidden; margin-bottom: 20px; border-radius: 8px; }
+
+/* Fail style.css */
+#panorama {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+}
+
+.pano-box {
+    height: 500px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+}
+
+#room-title { margin-top: 20px; }
+
+/* Container utama thumbnails */
+.thumbnails-row { 
+    display: flex; 
+    gap: 15px;
+    margin-top: 40px; 
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    overflow-x: auto;
+    justify-content: flex-start; /* Bermula dari kiri */
+}
+
+/* Class baru: Jika item sikit, letak di tengah (Aras 4) */
+.thumbnails-row.few-items {
+    justify-content: center;
+}
+
+/* Gaya kad thumbnail */
+.thumb-card { 
+    flex: 0 0 calc(20% - 12px);  /* 5 kad dalam satu masa */
+    min-width: 160px;
+    border: 2px solid #eee; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    background: #fff;
+    scroll-snap-align: start;
+}
+
+/* Gambar dalam kad */
+.thumb-card img { 
+    width: 100%; 
+    height: 120px;           /* Tinggikan gambar */
+    object-fit: cover; 
+    transition: 0.3s;
+}
+
+/* Teks bawah gambar */
+.thumb-card p { 
+    padding: 10px; 
+    font-size: 14px; 
+    font-weight: 600;
+    margin: 0; 
+    text-align: center; 
+    color: #333;
+}
+
+/* --- KESAN HIGHLIGHT (Bila Aktif) --- */
+.thumb-card.active {
+    border-color: #e11d48;    /* Warna merah highlight */
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.3);
+    transform: translateY(-5px); /* Kad naik sedikit */
+}
+
+.thumb-card.active p {
+    color: #e11d48;
+}
+
+/* Kesan bila mouse lalu (Hover) */
+.thumb-card:hover:not(.active) {
+    border-color: #004080;
+    transform: translateY(-3px);
+}
+/* Pastikan kotak panorama ada tinggi dan margin */
+.pano-box {
+    height: 450px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #eee;
+}
+.video-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Pastikan video tidak terlalu tinggi supaya tak penuh skrin */
+.video-grid iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 420;
+}
+
+/* Fail style.css */
+.viewer-video-box iframe {
+    width: 100%;
+    height: 600px; /* Tingkatkan daripada 400px kepada 600px */
+}
+
+.video-grid iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 500px; /* Saiz video untuk paparan grid (Multi) */
+}
+
+/* (thumbnails-row dah defined atas) */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr; /* jadi 1 column */
+    }
+}
+/* ===== Room Info Card (Hikmah & Eksplorasi) ===== */
+.ric-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.8rem 2rem;max-width:100%;margin:12px auto}
+.ric-badge{display:inline-block;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:#dbeafe;color:#1e40af;margin-bottom:14px;letter-spacing:.04em}
+.ric-title{font-size:26px;font-weight:700;color:#0f172a;margin:0 0 4px}
+.ric-cap-row{display:flex;align-items:center;gap:10px;margin:12px 0 20px}
+.ric-cap-icon{width:38px;height:38px;border-radius:50%;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.ric-cap-num{font-size:26px;font-weight:700;color:#004080}
+.ric-cap-label{font-size:13px;color:#64748b;margin-top:2px}
+.ric-divider{border:none;border-top:1px solid #e2e8f0;margin:0 0 18px}
+.ric-section-label{font-size:11px;color:#94a3b8;letter-spacing:.08em;font-weight:700;margin:0 0 10px;text-transform:uppercase}
+.ric-filter-hint{font-size:12px;color:#94a3b8;margin:0 0 10px;font-style:italic}
+.ric-facility-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.ric-fac{display:flex;align-items:center;gap:7px;padding:8px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#334155;cursor:pointer;transition:all .15s;user-select:none}
+.ric-fac:hover{border-color:#004080}
+.ric-fac.active{background:#004080;border-color:#004080;color:#fff}
+.ric-fac.active .ric-dot{background:#fff !important}
+.ric-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ric-dot-blue{background:#3b82f6}
+.ric-dot-green{background:#22c55e}
+.ric-rooms-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:10px}
+.ric-rn{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;text-align:center;padding:7px 2px;font-size:13px;font-weight:500;color:#475569;transition:all .2s;position:relative}
+.ric-rn-comp{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.ric-rn-both{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+.ric-rn.unavailable{background:#f8fafc !important;color:#cbd5e1 !important;border-color:#f1f5f9 !important;opacity:.4}
+.ric-rn.unavailable[title]{cursor:help}
+.ric-rn.unavailable[title]:hover::after{content:attr(title);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1e3a8a;color:white;font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:99;pointer-events:none}
+.ric-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+.ric-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b}
+.ric-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+
+/* ===== Room Info Card YANG LAIN ===== */
+.ric-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.8rem 2rem;max-width:100%;margin:12px auto}
+.ric-badge{display:inline-block;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:#dbeafe;color:#1e40af;margin-bottom:14px;letter-spacing:.04em}
+.ric-title{font-size:26px;font-weight:700;color:#0f172a;margin:0 0 4px}
+.ric-cap-row{display:flex;align-items:center;gap:10px;margin:12px 0 20px}
+.ric-cap-icon{width:38px;height:38px;border-radius:50%;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.ric-cap-num{font-size:26px;font-weight:700;color:#004080}
+.ric-cap-label{font-size:13px;color:#64748b;margin-top:2px}
+.ric-divider{border:none;border-top:1px solid #e2e8f0;margin:0 0 18px}
+.ric-section-label{font-size:11px;color:#94a3b8;letter-spacing:.08em;font-weight:700;margin:0 0 10px;text-transform:uppercase}
+.ric-filter-hint{font-size:12px;color:#94a3b8;margin:0 0 10px;font-style:italic}
+.ric-desc{font-size:14px;color:#475569;line-height:1.75;margin:0 0 20px}
+.ric-facility-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.ric-fac{display:flex;align-items:center;gap:7px;padding:8px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#334155;cursor:pointer;transition:all .15s;user-select:none}
+.ric-fac:hover{border-color:#004080}
+.ric-fac.active{background:#004080;border-color:#004080;color:#fff}
+.ric-fac.active .ric-dot{background:#fff !important}
+.ric-fac.no-filter{cursor:default;pointer-events:none}
+.ric-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ric-dot-blue{background:#3b82f6}
+.ric-dot-green{background:#22c55e}
+.ric-dot-red{background:#ef4444}
+.ric-dot-yellow{background:#f59e0b}
+.ric-dot-purple{background:#8b5cf6}
+.ric-rooms-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:10px}
+.ric-rn{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;text-align:center;padding:7px 2px;font-size:13px;font-weight:500;color:#475569;transition:all .2s}
+.ric-rn-comp{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.ric-rn-both{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+.ric-rn.unavailable{background:#f8fafc !important;color:#cbd5e1 !important;border-color:#f1f5f9 !important;opacity:.4}
+.ric-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+.ric-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b}
+.ric-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.ric-note{font-size:13px;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;align-items:flex-start;gap:8px}
+
+/* ==========================================
+   6. PAGES: MAPS
+   ========================================== */
+.maps-container { padding: 40px 5%; }
+.map-box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+.floor-bar { 
+    background: #1e3a8a; color: white; padding: 10px 15px; margin-top: 20px; font-weight: bold; border-radius: 4px;
+}
+.room-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px 0; text-align: center; }
+.room-card { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 6px; }
+.room-card h4 { margin: 0; color: #1e3a8a; }
+
+.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+.info-box { 
+    background: white; padding: 30px 28px; border: 1px solid #e2e8f0; border-radius: 16px; 
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+.info-box:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+
+/* Icon bulat dengan warna latar */
+.info-icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3a8a, #3b5bdb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 14px rgba(30,58,138,0.25);
+}
+.info-fa-icon {
+    font-size: 24px;
+    color: white;
+}
+
+.info-box h3 { 
+    font-size: 18px; font-weight: 700; color: #1e3a8a; 
+    margin: 0 0 16px; padding-bottom: 10px; 
+    border-bottom: 2px solid #e11d48;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+.info-table { display: flex; flex-direction: column; gap: 6px; }
+.info-row { 
+    display: flex; justify-content: space-between; gap: 12px;
+    font-size: 13px; color: #475569; line-height: 1.5;
+    padding: 8px 10px; background: #f8fafc; border-radius: 8px;
+}
+.info-row span:first-child { font-weight: 600; color: #1e3a8a; white-space: nowrap; }
+.info-row span:last-child { text-align: right; color: #475569; }
+.info-row span:last-child a { color: #e11d48; }
+.info-row.holiday span { color: #94a3b8 !important; }
+
+/* Operating Hours - 4 column grid */
+.info-row.hours-header,
+.info-row.hours-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 8px;
+    text-align: center;
+}
+.info-row.hours-header span,
+.info-row.hours-row span {
+    text-align: center;
+    font-weight: normal;
+    color: #475569;
+    white-space: normal;
+}
+.info-row.hours-header { background: #e8eef7; font-weight: 700; }
+.info-row.hours-header span { font-weight: 700; color: #1e3a8a; }
+.info-row.hours-row span:first-child { font-weight: 600; color: #1e3a8a; text-align: left; }
+.info-row.holiday { display: grid; grid-template-columns: 1.8fr 3fr; gap: 8px; }
+.info-row.holiday span:first-child { text-align: left; }
+.closed-tag { color: #94a3b8 !important; font-style: italic; }
+
+/* Kesan Highlight untuk Room Card di Maps */
+.room-card {
+    background: #f8fafc;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer; /* Tukar pointer mouse */
+    transition: all 0.3s ease;
+}
+
+.room-card:hover {
+    background: #e11d48; /* Warna merah UTHM bila hover */
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.room-card:hover h4 {
+    color: white; /* Tukar tajuk jadi putih bila hover */
+}
+
+/* Container Utama untuk setiap aras */
+.floor-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Bahagian Gambar (Kiri) */
+.floor-image {
+    flex: 1; /* Ambil lebih kurang 30-40% ruang */
+    min-width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.floor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pastikan gambar penuh kotak tanpa penyek */
+}
+
+/* Bahagian Grid Bilik (Kanan) */
+.room-grid {
+    flex: 2; /* Ambil baki ruang yang ada */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Susun 2 bilik sebaris seperti lakar anda */
+    gap: 20px;
+    align-content: start;
+}
+
+/* Penyesuaian untuk skrin kecil (Mobile) */
+@media (max-width: 900px) {
+    .floor-row {
+        flex-direction: column; /* Gambar akan berada di atas bilik */
+    }
+    .room-grid {
+        grid-template-columns: 1fr; /* 1 bilik sebaris */
+    }
+}
+
+
+/* ==========================================
+   7. PAGES: TEAM
+   ========================================== */
+   
+   /* H1 untuk section content (bukan hero banner) */
+h1.section-title {
+    color: #1e3a8a;
+}
+   
+.team-container { 
+    padding: 60px 5%;
+    max-width: 100%;
+    margin: 0 auto; 
+    box-sizing: border-box; 
+    text-align: center;
+}
+.section-box { margin-bottom: 80px; width: 100%; }
+
+
+
+.section-box h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #e11d48;
+    margin: 12px auto 40px;
+    border-radius: 2px;
+}
+
+/* ── PENASIHAT ── */
+.supervisor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+}
+
+/* Gambar penasihat bulat — 300px, jelas tanpa zoom */
+.profile-img-wrap {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #e8edf5;
+    box-shadow: 0 6px 20px rgba(30,58,138,0.18);
+    background: #e8edf5;
+    margin-bottom: 22px;
+    flex-shrink: 0;
+}
+.profile-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* fokus muka */
+}
+.profile-info h2 { font-size: 22px; margin: 0 0 6px; color: #1e3a8a; }
+.profile-info h3 { 
+    font-size: 14px; margin: 0 0 12px; color: #e11d48; font-weight: 600;
+    display: inline-block; background: #fff0f3; padding: 4px 14px; border-radius: 20px;
+}
+.profile-bio { font-size: 14px; color: #64748b; margin: 0; line-height: 1.7; }
+
+/* ── GAMBAR TEAM BESAR — centered, no blue gap ── */
+.team-photo-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.team-photo-wrap img {
+    max-width: 70%;
+    height: 800px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    display: block;
+}
+
+/* ── MEMBER CARDS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 0; }
+
+.member-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border: none;
+}
+.member-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.13);
+}
+
+/* Gambar member bulat — 150px, jelas */
+.member-img-wrap {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 4px solid #e8edf5;
+    box-shadow: 0 4px 14px rgba(30,58,138,0.13);
+    background: #e8edf5;
+}
+.member-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.member-card h2 { font-size: 20px; margin: 0 0 6px; color: #1e3a8a; font-weight: 700; }
+.member-matrix { font-size: 13px; color: #94a3b8; margin: 0 0 8px; }
+.member-role {
+    display: inline-block; background: #eff6ff; color: #1e3a8a;
+    font-size: 13px; font-weight: 600; padding: 5px 16px;
+    border-radius: 20px; margin: 0 0 12px;
+}
+.member-quote {
+    font-size: 13px; color: #94a3b8; font-style: italic; margin: 0; line-height: 1.6;
+    border-top: 1px solid #f1f5f9; padding-top: 12px; margin-top: 4px;
+}
+
+/* ── PENGHARGAAN ── */
+.ack-subtitle {
+    color: #64748b; font-size: 16px; margin: -20px 0 36px; text-align: center;
+}
+.ack-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 30px; max-width: 100%; margin: 0 auto;
+}
+.ack-card {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    background: white; border-radius: 20px; padding: 40px 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-top: 5px solid #e11d48;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.ack-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+}
+
+/* Gambar acknowledgment bulat — 150px */
+.ack-img-wrap {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 4px solid #fce7eb;
+    box-shadow: 0 4px 14px rgba(225,29,72,0.15);
+    background: #fce7eb;
+}
+.ack-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.ack-badge {
+    display: inline-block; background: #fff0f3; color: #e11d48;
+    font-size: 12px; font-weight: 700; padding: 4px 14px;
+    border-radius: 20px; margin-bottom: 12px;
+    letter-spacing: 0.5px; text-transform: uppercase;
+}
+.ack-info { width: 100%; }
+.ack-info h2 { font-size: 22px; margin: 0 0 6px; color: #1e3a8a; }
+.ack-info h3 { font-size: 14px; margin: 0 0 12px; color: #64748b; font-weight: 400; }
+.ack-desc { font-size: 14px; color: #64748b; margin: 0; line-height: 1.7; }
+
+.ack-grid .ack-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+/* ── FOOTAGE ── */
+.footage-gallery { 
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px; gap: 16px; margin-top: 20px;
+}
+.box { 
+    background: #e2e8f0; border-radius: 12px; overflow: hidden;
+    border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center;
+}
+.box img, .box video { width: 100%; height: 100%; object-fit: cover; }
+.box.big { grid-column: span 2; grid-row: span 2; }
+
+/* Buang override lama yang tak perlu */
+.img-box { width: 100%; height: 200px; background: #ddd; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+.img-box img { width: 100%; height: 100%; object-fit: cover; }
+

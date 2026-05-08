@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>UTHM Library | LEVELS 4</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css"/>
+	<script type="text/javascript" src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-center">
+			<a href="index.html">HOME</a> 
+			<div class="dropdown">
+			<a href="#" class="dropbtn">FLOOR LEVELS &#9662;</a>
+			<div class="dropdown-content">
+				<a href="Aras 1.html">LEVEL 1</a>
+				<a href="Aras 2.html">LEVEL 2</a>
+				<a href="Aras 3.html">LEVEL 3</a>
+				<a href="Aras 4.html" class="active" >LEVEL 4</a>
+			</div>
+			</div>
+			<a href="Maps.html">MAPS</a>
+			<a href="Team.html">TEAM</a>
+		</div>
+		</nav>
+
+  
+  <header class="hero-banner" style="background-image: url('Aras 1.jpg');">
+    <h1>LEVEL 4 — REFLECT & RECHARGE</h1>
+    <h2>A quiet sanctuary above it all. Explore Level 4's peaceful spaces in immersive 360°.</h2>
+</header>
+
+  <main class="tour-main-wrapper">
+    <aside class="sidebar-list">
+        <h3>INTERACTIVE ROOM DIRECTORY</h3>
+        <div class="room-item-card active" data-id="Serambi Al-Quran">Serambi Al-Quran</div>
+    </aside>
+
+<section class="viewer-content">
+		<!-- Container untuk Video (Boleh jadi banyak) -->
+		<div id="video-area" class="viewer-video-box">
+			<iframe id="room-video" width="100%" height="600px" src="" frameborder="0" allowfullscreen></iframe>
+		</div>
+	
+		<!-- Container untuk Panorama (Boleh jadi banyak) -->
+		<div id="panorama-area">
+			<div id="panorama" style="width: 100%; height: 600px; border-radius: 8px;"></div>
+		</div>
+
+		<h2 id="room-title">Nama Bilik</h2>
+		<p id="room-desc">Deskripsi bilik...</p>
+			
+		<div class="thumbnails-row">
+		<div class="thumb-card" data-id="Serambi Al-Quran"><img src="Aras 1.jpg"><p>Serambi Al-Quran</p></div>
+	</div>
+	
+    </section>
+	
+</main>
+
+ <script>
+    const roomData = {
+        'Serambi Al-Quran': { 
+            title: 'Serambi Al-Quran',
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Serambi Al-Quran.mp4',
+            image: 'Projek/Image/Serambi Al-Quran.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 4</span>
+  <div class="ric-title">Serambi Al-Quran</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">🕌</div>
+    <div><div class="ric-cap-num">Open to All</div><div class="ric-cap-label">Free spiritual space for all users</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">Serambi Al-Quran, located on Level 4 beside the Tan Sri Johan Jaaffar Corner, is a tranquil spiritual space dedicated to Quranic reading, prayer, and quiet reflection. Prayer mats and the qibla direction are provided for convenience. Users are kindly requested to remove their shoes before entering to maintain the cleanliness and sanctity of the space. Free and open to all library users.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Prayer Mats</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Qibla Direction Provided</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-yellow"></span>Quiet Reflection Space</div>
+  </div>
+  <div class="ric-note">👟 <span>Please <strong>remove shoes</strong> before entering.</span></div>
+</div>`
+        }
+    };
+
+    let viewer1 = null;
+    let viewer2 = null;
+
+    function updateRoomView(id) {
+        const data = roomData[id];
+        const videoArea = document.getElementById('video-area');
+        const panoramaArea = document.getElementById('panorama-area');
+
+        // Reset kandungan asal
+        videoArea.innerHTML = '';
+        panoramaArea.innerHTML = '';
+        if (viewer1) { viewer1.destroy(); viewer1 = null; }
+        if (viewer2) { viewer2.destroy(); viewer2 = null; }
+
+        document.getElementById('room-title').innerText = data.title;
+        const descEl = document.getElementById('room-desc');
+        if (data.infoCard) { descEl.innerHTML = data.infoCard; } else { descEl.innerHTML = data.desc; }
+
+        if (data.isMulti) {
+		// BUAT CONTAINER GRID
+		const videoGrid = document.createElement('div');
+		videoGrid.className = 'video-grid';
+
+		// LOOP VIDEO MASUK DALAM GRID
+		data.videos.forEach((vSrc) => {
+		const ifrm = document.createElement('iframe');
+		ifrm.src = vSrc;
+		ifrm.setAttribute("frameborder", "0");
+		ifrm.setAttribute("allowfullscreen", "true");
+		videoGrid.appendChild(ifrm);
+});
+
+// MASUKKAN GRID KE VIDEO AREA
+videoArea.appendChild(videoGrid);
+
+            // BUAT 2 RUANG PANORAMA
+            const div1 = document.createElement('div');
+            div1.id = 'pano1';
+            div1.style.height = '650px';
+            div1.style.marginBottom = '25px';
+            div1.style.borderRadius = '10px';
+            panoramaArea.appendChild(div1);
+            
+            const div2 = document.createElement('div');
+            div2.id = 'pano2';
+            div2.style.height = '650px';
+            div2.style.borderRadius = '10px';
+            panoramaArea.appendChild(div2);
+
+            viewer1 = pannellum.viewer('pano1', {
+                "type": "equirectangular",
+                "panorama": data.scenes.sudutA.panorama,
+                "autoLoad": true,
+                "title": "Sudut Pandangan A"
+            });
+
+            viewer2 = pannellum.viewer('pano2', {
+                "type": "equirectangular",
+                "panorama": data.scenes.sudutB.panorama,
+                "autoLoad": true,
+                "title": "Sudut Pandangan B"
+            });
+
+        } else {
+            // LOGIK ASAL (1 RUANG)
+			const ifrm = document.createElement('iframe');
+				ifrm.src = data.video;
+				ifrm.width = "100%";
+				ifrm.height = "650px"; // TUKAR DARI 400px KE 600px
+				ifrm.setAttribute("frameborder", "0");
+				ifrm.setAttribute("allowfullscreen", "true");
+				videoArea.appendChild(ifrm);
+
+            const divPano = document.createElement('div');
+            divPano.id = 'panorama';
+            divPano.style.height = '650px';
+            divPano.style.borderRadius = '8px';
+            panoramaArea.appendChild(divPano);
+
+            viewer1 = pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": data.image,
+                "autoLoad": true
+            });
+        }
+
+        // Sync Active Class
+        document.querySelectorAll('.room-item-card, .thumb-card').forEach(i => {
+            i.classList.remove('active');
+            if(i.getAttribute('data-id') === id) i.classList.add('active');
+        });
+    }
+
+// 1. Fungsi untuk check jumlah thumbnail
+		function checkThumbnailCount() {
+			const thumbRow = document.querySelector('.thumbnails-row');
+			if (thumbRow) {
+				const items = thumbRow.querySelectorAll('.thumb-card');
+				if (items.length <= 3) {
+					thumbRow.classList.add('few-items');
+				} else {
+					thumbRow.classList.remove('few-items');
+				}
+			}
+		}
+
+		// 2. Event Listener untuk Scroll (Nav Effect)
+		window.addEventListener("scroll", function() {
+			const nav = document.querySelector(".main-nav");
+			if (window.scrollY > 50) {
+				nav.classList.add("scrolled");
+			} else {
+				nav.classList.remove("scrolled");
+			}
+		}); // Pastikan ada penutup }); di sini
+
+		// 3. Gabungkan semua dalam SATU window.onload
+		window.onload = () => {
+			// Detect bilik pertama secara dinamik berdasarkan item pertama dalam sidebar
+			const firstRoom = document.querySelector('.room-item-card').getAttribute('data-id');
+    
+			if (firstRoom) {
+				updateRoomView(firstRoom);
+			}
+    
+			checkThumbnailCount();
+		};
+
+		// Event Listeners untuk klik
+		document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
+			item.addEventListener('click', function() {
+				updateRoomView(this.getAttribute('data-id'));
+			});
+		});
+</script>
+   <footer>
+        <div class="footer-main">
+
+            <!-- Kiri: Logo + Info -->
+            <div class="footer-brand">
+                <img src="Projek/Global/Logo.png" alt="UTHM Logo" class="footer-logo-img">
+                <div class="footer-brand-info">
+                    <p><strong>Perpustakaan Tunku Tun Aminah</strong></p>
+                    <p>Universiti Tun Hussein Onn Malaysia (UTHM),</p>
+                    <p>86400 Parit Raja, Batu Pahat, Johor, Malaysia.</p>
+                    <p>Phone : +607-4533318</p>
+                    <p>Fax : +607-4533199</p>
+                    <p>E-mail : <a href="mailto:library@uthm.edu.my">library@uthm.edu.my</a></p>
+                </div>
+            </div>
+
+            <!-- Tengah Kiri: UTHM Links -->
+            <div class="footer-col">
+                <h4>UTHM Links</h4>
+                <ul>
+                    <li><a href="https://www.uthm.edu.my/en/">UTHM Website</a></li>
+                    <li><a href="https://penerbit.uthm.edu.my/ojs/">UTHM Journals</a></li>
+                    <li><a href="https://publisher.uthm.edu.my/periodicals/">UTHM Periodicals</a></li>
+                    <li><a href="http://e-bookstore.uthm.edu.my/">UTHM e-Bookstore</a></li>
+                    <li><a href="https://news.uthm.edu.my/ms/e-wacana/">UTHM e-News</a></li>
+                    <li><a href="https://wecare.uthm.edu.my/">UTHM WeCare</a></li>
+                </ul>
+            </div>
+
+            <!-- Tengah Kanan: Related Links -->
+            <div class="footer-col">
+                <h4>Related Links</h4>
+                <ul>
+                    <li><a href="http://perpun.upm.edu.my/myuninet/">My UniNet</a></li>
+                    <li><a href="https://www.pnm.gov.my/">National Library of Malaysia</a></li>
+                    <li><a href="https://www.u-library.gov.my/portal/web/guest/home">u-Pustaka</a></li>
+                    <li><a href="https://kik.pnm.gov.my/index.php/en/">Katalog Induk Kebangsaan (KIK)</a></li>
+                    <li><a href="https://ppaj.johor.gov.my/">Perbadanan Perpustakaan Awam Johor</a></li>
+                </ul>
+            </div>
+
+            <!-- Kanan: Follow Us -->
+            <div class="footer-col footer-social-col">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/PTTAUTHM" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.instagram.com/pttauthm/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@pttauthm?lang=en" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@pttauthm9142/featured" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    <li><a href="https://twitter.com/pttauthm" target="_blank"><i class="fab fa-x-twitter"></i> X (Twitter)</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="https://library.uthm.edu.my/privacy.html">Privacy</a> |
+                <a href="https://library.uthm.edu.my/disclaimer.html">Disclaimer</a> |
+                <a href="https://library.uthm.edu.my/copyright.html">Copyright</a> |
+                <a href="https://library.uthm.edu.my/rules-regulations.html">Rules &amp; Regulations</a>
+            </div>
+            <p>Copyright &copy; 2026 by Perpustakaan Tunku Tun Aminah, UTHM. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

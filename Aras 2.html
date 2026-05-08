@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>UTHM Library | LEVELS 2</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css"/>
+	<script type="text/javascript" src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-center">
+			<a href="index.html">HOME</a> 
+			<div class="dropdown">
+			<a href="#" class="dropbtn">FLOOR LEVELS &#9662;</a>
+			<div class="dropdown-content">
+				<a href="Aras 1.html">LEVEL 1</a>
+				<a href="Aras 2.html"  class="active"  >LEVEL 2</a>
+				<a href="Aras 3.html">LEVEL 3</a>
+				<a href="Aras 4.html">LEVEL 4</a>
+			</div>
+			</div>
+			<a href="Maps.html">MAPS</a>
+			<a href="Team.html">TEAM</a>
+		</div>
+		</nav>
+
+	<header class="hero-banner" style="background-image: url('Aras 1.jpg');">
+    <h1>LEVEL 2 — STUDY, COLLABORATE & CREATE</h1>
+    <h2>Smart classrooms, private study pods, and collaborative labs. Experience Level 2 in 360°.</h2>
+</header>
+
+ 
+<main class="tour-main-wrapper">
+    <aside class="sidebar-list">
+        <h3>INTERACTIVE ROOM DIRECTORY</h3>
+        <div class="room-item-card active" data-id="Sister Zone">Sister Zone</div>
+        <div class="room-item-card" data-id="Hikmah">Hikmah Room</div>
+        <div class="room-item-card" data-id="Iqra">Iqra Room</div>
+        <div class="room-item-card" data-id="Remote Pilot Classroom">Remote Pilot Classroom</div>
+        <div class="room-item-card" data-id="Makmal AI">AI Lab Room</div>
+    </aside>
+
+<section class="viewer-content">
+		<!-- Container untuk Video (Boleh jadi banyak) -->
+		<div id="video-area" class="viewer-video-box">
+			<iframe id="room-video" width="100%" height="600px" src="" frameborder="0" allowfullscreen></iframe>
+		</div>
+	
+		<!-- Container untuk Panorama (Boleh jadi banyak) -->
+		<div id="panorama-area">
+			<div id="panorama" style="width: 100%; height: 600px; border-radius: 8px;"></div>
+		</div>
+
+		<h2 id="room-title">Nama Bilik</h2>
+		<p id="room-desc">Deskripsi bilik...</p>
+			
+		<div class="thumbnails-row">
+		<div class="thumb-card" data-id="Sister Zone"><img src="Aras 1.jpg"><p>Sister Zone</p></div>
+		<div class="thumb-card" data-id="Hikmah"><img src="Aras 2.jpg"><p>Hikmah Room</p></div>
+		<div class="thumb-card" data-id="Iqra"><img src="Aras 1.jpg"><p>Iqra Room</p></div>
+		<div class="thumb-card" data-id="Remote Pilot Classroom"><img src="Aras 2.jpg"><p>Remote Pilot Classroom</p></div>
+		<div class="thumb-card" data-id="Makmal AI"><img src="Aras 1.jpg"><p>AI Lab Room</p></div>
+	</div>
+	
+    </section>
+	
+</main>
+
+ <script>
+    const roomData = {
+        'Sister Zone': { 
+            title: 'Sister Zone',
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Sister Zone.mp4',
+            image: 'Projek/Image/Sister Zone.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 2</span>
+  <div class="ric-title">Sister Zone</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">🏅</div>
+    <div><div class="ric-cap-num">Open to All</div><div class="ric-cap-label">Women-only space</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">The Sister Zone, located on Level 2 of the library, is a private, women-only space designed for rest and mental wellness. Furnished with sofas, bean bags, and carpets, it offers a cozy, distraction-free environment perfect for unwinding between classes. Users are kindly asked to remove their shoes to maintain cleanliness, ensuring a safe and welcoming area that supports inclusivity and relaxation.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-yellow"></span>Sofas</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-yellow"></span>Bean Bags</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Carpeted Floor</div>
+  </div>
+  <div class="ric-note">👟 <span>Please <strong>remove shoes</strong> before entering.</span></div>
+</div>`
+        },
+        'Hikmah': { 
+            title: 'Hikmah Room', 
+            desc: 'Aras 1 - Ruang privasi untuk perbincangan intensif.', 
+            isMulti: false,
+            video: 'Projek/Video/Hikmah.mp4',
+            image: 'Projek/Image/Hikmah.jpg',
+            infoCard: `
+<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 2</span>
+  <div class="ric-title">Hikmah Room</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">&#128100;</div>
+    <div>
+      <div class="ric-cap-num">4 &ndash; 6</div>
+      <div class="ric-cap-label">People (Capacity)</div>
+    </div>
+  </div>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Filter by Facilities</div>
+  <div class="ric-filter-hint">Click to filter rooms by facilities</div>
+  <div class="ric-facility-grid" id="filters-hikmah">
+    <div class="ric-fac" data-fac="desk"><span class="ric-dot ric-dot-blue"></span>Desk</div>
+    <div class="ric-fac" data-fac="chair"><span class="ric-dot ric-dot-blue"></span>Chair</div>
+    <div class="ric-fac" data-fac="japanese"><span class="ric-dot ric-dot-blue"></span>Japanese Desk</div>
+    <div class="ric-fac" data-fac="computer"><span class="ric-dot ric-dot-green"></span>Computer</div>
+    <div class="ric-fac" data-fac="projector"><span class="ric-dot ric-dot-green"></span>LCD Projector</div>
+  </div>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Room Lists (Room 1&ndash;20)</div>
+  <div class="ric-rooms-grid" id="rooms-hikmah">
+    <div class="ric-rn" data-facs="desk,chair">1</div>
+    <div class="ric-rn" data-facs="japanese">2</div>
+    <div class="ric-rn ric-rn-comp" data-facs="japanese,computer">3</div>
+    <div class="ric-rn" data-facs="desk,chair">4</div>
+    <div class="ric-rn ric-rn-comp" data-facs="japanese,computer">5</div>
+    <div class="ric-rn" data-facs="japanese">6</div>
+    <div class="ric-rn ric-rn-comp" data-facs="desk,chair,computer">7</div>
+    <div class="ric-rn" data-facs="desk,chair">8</div>
+    <div class="ric-rn ric-rn-comp" data-facs="desk,chair,computer">9</div>
+    <div class="ric-rn" data-facs="desk,chair">10</div>
+    <div class="ric-rn ric-rn-comp" data-facs="desk,chair,computer">11</div>
+    <div class="ric-rn" data-facs="desk,chair">12</div>
+    <div class="ric-rn ric-rn-both" data-facs="desk,chair,computer,projector">13</div>
+    <div class="ric-rn" data-facs="desk,chair">14</div>
+    <div class="ric-rn ric-rn-both" data-facs="desk,chair,computer,projector">15</div>
+    <div class="ric-rn" data-facs="desk,chair">16</div>
+    <div class="ric-rn ric-rn-both" data-facs="desk,chair,computer,projector">17</div>
+    <div class="ric-rn" data-facs="desk,chair">18</div>
+    <div class="ric-rn ric-rn-both" data-facs="desk,chair,computer,projector">19</div>
+    <div class="ric-rn" data-facs="desk,chair">20</div>
+  </div>
+  <div class="ric-legend">
+    <div class="ric-leg-item"><div class="ric-leg-dot" style="background:#f1f5f9;border:1px solid #e2e8f0"></div>Desk &amp; Chair only</div>
+    <div class="ric-leg-item"><div class="ric-leg-dot" style="background:#fef9c3;border:1px solid #fde68a"></div>Japanese Desk</div>
+    <div class="ric-leg-item"><div class="ric-leg-dot" style="background:#eff6ff;border:1px solid #bfdbfe"></div>Komputer availabe</div>
+    <div class="ric-leg-item"><div class="ric-leg-dot" style="background:#f0fdf4;border:1px solid #bbf7d0"></div>Komputer and LCD available</div>
+  </div>
+</div>`
+        },
+        'Iqra': { 
+            title: "Iqra Room'",
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Iqra.mp4',
+            image: 'Projek/Image/Iqra.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 2 & 4</span>
+  <div class="ric-title">Iqra' Room</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">📚</div>
+    <div><div class="ric-cap-num">118</div><div class="ric-cap-label">rooms available across Level 2 & 4</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">The Iqra' Room is a private study space ideal for focused, distraction-free learning. With 118 rooms spread across Levels 2 and 4, some rooms are equipped with network points and power sockets for added convenience. Available for rent at RM20 per month — bookings can be made at the Circulation Counter on Level 1.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Study Desk & Chair</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Network Point (selected rooms)</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Power Socket (selected rooms)</div>
+  </div>
+  <div class="ric-note">💰 <span>Rental: <strong>RM20 / month</strong> — Book at Circulation Counter, Level 1.</span></div>
+</div>`
+        },
+        'Remote Pilot Classroom': { 
+            title: 'Remote Pilot Smart Classroom',
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Remote Pilot.mp4',
+            image: 'Projek/Image/Remote Pilot.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 2</span>
+  <div class="ric-title">Remote Pilot Smart Classroom</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">✈️</div>
+    <div><div class="ric-cap-num">Open to All</div><div class="ric-cap-label">Modern learning environment</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">The Remote Pilot Smart Classroom on Level 2 is a modern, technology-equipped learning space designed to support innovative education. With a blend of structured learning areas and relaxed seating zones, it provides a flexible environment suitable for both formal lessons and casual group discussions.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Modern Classroom Setup</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-yellow"></span>Relaxation Zone</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Smart Learning Equipment</div>
+  </div>
+</div>`
+        },
+        'Makmal AI': { 
+            title: 'AI Lab Room',
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Makmal AI.mp4',
+            image: 'Projek/Image/Makmal AI.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 2</span>
+  <div class="ric-title">AI.DA Lab Room</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">👤</div>
+    <div><div class="ric-cap-num">15</div><div class="ric-cap-label">participants (capacity)</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">The UTHM AI.DA Lab Room, located on Level 2 of Tunku Tun Aminah Library, is a fully equipped smart collaboration space designed for virtual meetings, training sessions, and innovative group projects. Fitted with cutting-edge technology including an IDEA HUB TV, Smart TVs, and a live conference camera, the room ensures a seamless and productive experience. CCTV is installed to maintain security and proper use of all facilities.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>IDEA HUB TV</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Smart TVs</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Live Conference Camera</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-purple"></span>CCTV Security</div>
+  </div>
+  <div class="ric-note">🌐 <span>Reservations via <strong>elab.uthm.edu.my</strong></span></div>
+</div>`
+        }
+    };
+
+    let viewer1 = null;
+    let viewer2 = null;
+
+    function updateRoomView(id) {
+        const data = roomData[id];
+        const videoArea = document.getElementById('video-area');
+        const panoramaArea = document.getElementById('panorama-area');
+
+        // Reset kandungan asal
+        videoArea.innerHTML = '';
+        panoramaArea.innerHTML = '';
+        if (viewer1) { viewer1.destroy(); viewer1 = null; }
+        if (viewer2) { viewer2.destroy(); viewer2 = null; }
+
+        document.getElementById('room-title').innerText = data.title;
+        const descEl = document.getElementById('room-desc');
+        if (data.infoCard) {
+            descEl.innerHTML = data.infoCard;
+            // Init filter selepas HTML dimasukkan
+            setTimeout(() => initRoomFilter(), 50);
+        } else {
+            descEl.innerHTML = data.desc;
+        }
+
+        if (data.isMulti) {
+		// BUAT CONTAINER GRID
+		const videoGrid = document.createElement('div');
+		videoGrid.className = 'video-grid';
+
+		// LOOP VIDEO MASUK DALAM GRID
+		data.videos.forEach((vSrc) => {
+		const ifrm = document.createElement('iframe');
+		ifrm.src = vSrc;
+		ifrm.setAttribute("frameborder", "0");
+		ifrm.setAttribute("allowfullscreen", "true");
+		videoGrid.appendChild(ifrm);
+});
+
+// MASUKKAN GRID KE VIDEO AREA
+videoArea.appendChild(videoGrid);
+
+            // BUAT 2 RUANG PANORAMA
+            const div1 = document.createElement('div');
+            div1.id = 'pano1';
+            div1.style.height = '650px';
+            div1.style.marginBottom = '25px';
+            div1.style.borderRadius = '10px';
+            panoramaArea.appendChild(div1);
+            
+            const div2 = document.createElement('div');
+            div2.id = 'pano2';
+            div2.style.height = '650px';
+            div2.style.borderRadius = '10px';
+            panoramaArea.appendChild(div2);
+
+            viewer1 = pannellum.viewer('pano1', {
+                "type": "equirectangular",
+                "panorama": data.scenes.sudutA.panorama,
+                "autoLoad": true,
+                "title": "Sudut Pandangan A"
+            });
+
+            viewer2 = pannellum.viewer('pano2', {
+                "type": "equirectangular",
+                "panorama": data.scenes.sudutB.panorama,
+                "autoLoad": true,
+                "title": "Sudut Pandangan B"
+            });
+
+        } else {
+            // LOGIK ASAL (1 RUANG)
+			const ifrm = document.createElement('iframe');
+				ifrm.src = data.video;
+				ifrm.width = "100%";
+				ifrm.height = "650px"; // TUKAR DARI 400px KE 600px
+				ifrm.setAttribute("frameborder", "0");
+				ifrm.setAttribute("allowfullscreen", "true");
+				videoArea.appendChild(ifrm);
+
+            const divPano = document.createElement('div');
+            divPano.id = 'panorama';
+            divPano.style.height = '650px';
+            divPano.style.borderRadius = '8px';
+            panoramaArea.appendChild(divPano);
+
+            viewer1 = pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": data.image,
+                "autoLoad": true
+            });
+        }
+
+        // Sync Active Class
+        document.querySelectorAll('.room-item-card, .thumb-card').forEach(i => {
+            i.classList.remove('active');
+            if(i.getAttribute('data-id') === id) i.classList.add('active');
+        });
+    }
+
+// 1. Fungsi untuk check jumlah thumbnail
+		function checkThumbnailCount() {
+			const thumbRow = document.querySelector('.thumbnails-row');
+			if (thumbRow) {
+				const items = thumbRow.querySelectorAll('.thumb-card');
+				if (items.length <= 3) {
+					thumbRow.classList.add('few-items');
+				} else {
+					thumbRow.classList.remove('few-items');
+				}
+			}
+		}
+
+		// 2. Event Listener untuk Scroll (Nav Effect)
+		window.addEventListener("scroll", function() {
+			const nav = document.querySelector(".main-nav");
+			if (window.scrollY > 50) {
+				nav.classList.add("scrolled");
+			} else {
+				nav.classList.remove("scrolled");
+			}
+		}); // Pastikan ada penutup }); di sini
+
+		// Gantikan blok window.onload anda dengan ini[cite: 14]
+		window.onload = () => {
+			const urlParams = new URLSearchParams(window.location.search);
+			const roomFromUrl = urlParams.get('room');
+
+			// Jika datang dari Maps dengan info bilik
+			if (roomFromUrl && roomData[roomFromUrl]) {
+				updateRoomView(roomFromUrl);
+			} 
+			// Jika masuk terus, ambil bilik pertama (default)
+			else {
+				const firstRoom = document.querySelector('.room-item-card').getAttribute('data-id');
+				if (firstRoom) updateRoomView(firstRoom);
+			}
+    
+			checkThumbnailCount();
+		};
+
+		// Pastikan bahagian ini ada untuk membolehkan klik manual di sidebar[cite: 14]
+		document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
+			item.addEventListener('click', function() {
+				const selectedId = this.getAttribute('data-id');
+				updateRoomView(selectedId);
+			});
+		});
+
+    // ===== FILTER FUNCTION untuk Hikmah =====
+    function initRoomFilter() {
+        const filterBtns = document.querySelectorAll('.ric-fac[data-fac]');
+        const roomCells = document.querySelectorAll('.ric-rn[data-facs]');
+        if (!filterBtns.length || !roomCells.length) return;
+
+        let activeFilters = new Set();
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const fac = btn.dataset.fac;
+                if (activeFilters.has(fac)) {
+                    activeFilters.delete(fac);
+                    btn.classList.remove('active');
+                } else {
+                    activeFilters.add(fac);
+                    btn.classList.add('active');
+                }
+                applyFilter();
+            });
+        });
+
+        function applyFilter() {
+            roomCells.forEach(cell => {
+                if (activeFilters.size === 0) {
+                    cell.classList.remove('unavailable');
+                } else {
+                    const cellFacs = cell.dataset.facs.split(',');
+                    const hasAll = [...activeFilters].every(f => cellFacs.includes(f));
+                    if (hasAll) {
+                        cell.classList.remove('unavailable');
+                    } else {
+                        cell.classList.add('unavailable');
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+   <footer>
+        <div class="footer-main">
+
+            <!-- Kiri: Logo + Info -->
+            <div class="footer-brand">
+                <img src="Projek/Global/Logo.png" alt="UTHM Logo" class="footer-logo-img">
+                <div class="footer-brand-info">
+                    <p><strong>Perpustakaan Tunku Tun Aminah</strong></p>
+                    <p>Universiti Tun Hussein Onn Malaysia (UTHM),</p>
+                    <p>86400 Parit Raja, Batu Pahat, Johor, Malaysia.</p>
+                    <p>Phone : +607-4533318</p>
+                    <p>Fax : +607-4533199</p>
+                    <p>E-mail : <a href="mailto:library@uthm.edu.my">library@uthm.edu.my</a></p>
+                </div>
+            </div>
+
+            <!-- Tengah Kiri: UTHM Links -->
+            <div class="footer-col">
+                <h4>UTHM Links</h4>
+                <ul>
+                    <li><a href="https://www.uthm.edu.my/en/">UTHM Website</a></li>
+                    <li><a href="https://penerbit.uthm.edu.my/ojs/">UTHM Journals</a></li>
+                    <li><a href="https://publisher.uthm.edu.my/periodicals/">UTHM Periodicals</a></li>
+                    <li><a href="http://e-bookstore.uthm.edu.my/">UTHM e-Bookstore</a></li>
+                    <li><a href="https://news.uthm.edu.my/ms/e-wacana/">UTHM e-News</a></li>
+                    <li><a href="https://wecare.uthm.edu.my/">UTHM WeCare</a></li>
+                </ul>
+            </div>
+
+            <!-- Tengah Kanan: Related Links -->
+            <div class="footer-col">
+                <h4>Related Links</h4>
+                <ul>
+                    <li><a href="http://perpun.upm.edu.my/myuninet/">My UniNet</a></li>
+                    <li><a href="https://www.pnm.gov.my/">National Library of Malaysia</a></li>
+                    <li><a href="https://www.u-library.gov.my/portal/web/guest/home">u-Pustaka</a></li>
+                    <li><a href="https://kik.pnm.gov.my/index.php/en/">Katalog Induk Kebangsaan (KIK)</a></li>
+                    <li><a href="https://ppaj.johor.gov.my/">Perbadanan Perpustakaan Awam Johor</a></li>
+                </ul>
+            </div>
+
+            <!-- Kanan: Follow Us -->
+            <div class="footer-col footer-social-col">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/PTTAUTHM" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.instagram.com/pttauthm/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@pttauthm?lang=en" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@pttauthm9142/featured" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    <li><a href="https://twitter.com/pttauthm" target="_blank"><i class="fab fa-x-twitter"></i> X (Twitter)</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="https://library.uthm.edu.my/privacy.html">Privacy</a> |
+                <a href="https://library.uthm.edu.my/disclaimer.html">Disclaimer</a> |
+                <a href="https://library.uthm.edu.my/copyright.html">Copyright</a> |
+                <a href="https://library.uthm.edu.my/rules-regulations.html">Rules &amp; Regulations</a>
+            </div>
+            <p>Copyright &copy; 2026 by Perpustakaan Tunku Tun Aminah, UTHM. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

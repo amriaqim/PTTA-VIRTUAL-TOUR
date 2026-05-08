@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTHM Library | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-left"><img src="Projek/Global/logo.png" class="nav-logo" onclick="location.href='index.html'" style="cursor:pointer;"></div>
+        <div class="nav-center">
+			<a href="index.html" class="active">HOME</a> 
+		<div class="dropdown">
+			<a href="#" class="dropbtn">FLOOR LEVELS&#9662;</a>
+			<div class="dropdown-content">
+				<a href="Aras 1.html">LEVEL 1</a>
+				<a href="Aras 2.html">LEVEL 2</a>
+				<a href="Aras 3.html">LEVEL 3</a>
+				<a href="Aras 4.html">LEVEL 4</a>
+			</div>
+		</div>
+			<a href="Maps.html">MAPS</a>
+			<a href="Team.html">TEAM</a>
+		</div>
+		</nav>
+
+	<header class="hero-banner" style="background-image: url('Projek/Global/uthm.png');">
+        <h1>WELCOME TO UTHM LIBRARY FACILITIES</h1>
+        <h2>Explore modern study rooms, virtual 360° tours, and the available facilities.</h2>
+    </header>
+
+	<section class="carousel-section">
+		<div class="carousel-container">
+			<div class="carousel-slide">
+				<img src="Projek/Image/Al-Jazari.jpg" alt="Banner 1">
+			</div>
+
+			<div class="carousel-slide">
+				<img src="Projek/Image/Iqra.jpg" alt="Banner 2">
+			</div>
+
+		<div class="carousel-slide">
+			<!-- Tambah class 'carousel-video' -->
+			<video class="carousel-video" muted>
+				<source src="Projek/Video/Sister Zone.mp4" type="video/mp4">
+			</video>
+		</div>
+
+			<button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
+			<button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
+		</div>
+		
+		<div class="carousel-dots">
+            <span class="dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+		
+	</section>
+
+    <section class="floor-container">
+        <a href="Aras 1.html" class="floor-card">
+            <img src="Projek/Global/Floor Plan 1.webp" alt="Aras 1">
+            <div class="overlay">Level 1</div>
+        </a>
+        <a href="Aras 2.html" class="floor-card">
+            <img src="Projek/Global/Floor Plan 2.webp" alt="Aras 2">
+            <div class="overlay">Level 2</div>
+        </a>
+        <a href="Aras 3.html" class="floor-card">
+            <img src="Projek/Global/Floor Plan 3.webp" alt="Aras 3">
+            <div class="overlay">Level 3</div>
+        </a>
+        <a href="Aras 4.html" class="floor-card">
+            <img src="Projek/Global/Floor Plan 4.webp" alt="Aras 4">
+            <div class="overlay">Level 4</div>
+        </a>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <h3>360° Virtual Tours</h3>
+            <p>Explore every room in immersive view.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Interactive Maps</h3>
+            <p>Discover available learning spaces with our interactive library floor maps and virtual access.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Library Facilities Overview</h3>
+            <p>The library provides study rooms and facilities to support effective learning and research.</p>
+        </div>
+    </section>
+<script>
+    // 1. Fungsi Navigasi (Scroll)
+    window.addEventListener("scroll", function() {
+        const nav = document.querySelector(".main-nav");
+        if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    }); // Pastikan ada penutup }); di sini
+
+    // 2. Fungsi Carousel
+
+ let slideIndex = 0;
+    let slideTimer;
+    const slides = document.getElementsByClassName("carousel-slide");
+    const dots = document.getElementsByClassName("dot");
+
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        clearTimeout(slideTimer);
+        showSlides(slideIndex = n);
+    }
+
+    function moveSlide(n) {
+        clearTimeout(slideTimer);
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        if (n >= slides.length) { slideIndex = 0; }
+        if (n < 0) { slideIndex = slides.length - 1; }
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].className = dots[i].className.replace(" active", ""); // Buang kelas active lama
+            
+            let v = slides[i].querySelector('video');
+            if(v) { v.pause(); v.currentTime = 0; }
+        }
+
+        slides[slideIndex].style.display = "block";
+        dots[slideIndex].className += " active"; // Tambah kelas active pada titik semasa
+
+        let video = slides[slideIndex].querySelector('video');
+        if (video) {
+            video.play();
+            video.onended = function() { moveSlide(1); };
+        } else {
+            slideTimer = setTimeout(() => { moveSlide(1); }, 5000);
+        }
+		// 1. Buang kelas 'active' daripada semua kad (sidebar & thumbnails)
+    document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // 2. Tambah kelas 'active' kepada SEMUA elemen yang sepadan dengan id bilik sekarang
+    const activeElements = document.querySelectorAll(`[data-id="${id}"]`);
+    activeElements.forEach(el => {
+        el.classList.add('active');
+    });
+    }
+</script>
+   <footer>
+        <div class="footer-main">
+
+            <!-- Kiri: Logo + Info -->
+            <div class="footer-brand">
+                <img src="Projek/Global/Logo.png" alt="UTHM Logo" class="footer-logo-img">
+                <div class="footer-brand-info">
+                    <p><strong>Perpustakaan Tunku Tun Aminah</strong></p>
+                    <p>Universiti Tun Hussein Onn Malaysia (UTHM),</p>
+                    <p>86400 Parit Raja, Batu Pahat, Johor, Malaysia.</p>
+                    <p>Phone : +607-4533318</p>
+                    <p>Fax : +607-4533199</p>
+                    <p>E-mail : <a href="mailto:library@uthm.edu.my">library@uthm.edu.my</a></p>
+                </div>
+            </div>
+
+            <!-- Tengah Kiri: UTHM Links -->
+            <div class="footer-col">
+                <h4>UTHM Links</h4>
+                <ul>
+                    <li><a href="https://www.uthm.edu.my/en/">UTHM Website</a></li>
+                    <li><a href="https://penerbit.uthm.edu.my/ojs/">UTHM Journals</a></li>
+                    <li><a href="https://publisher.uthm.edu.my/periodicals/">UTHM Periodicals</a></li>
+                    <li><a href="http://e-bookstore.uthm.edu.my/">UTHM e-Bookstore</a></li>
+                    <li><a href="https://news.uthm.edu.my/ms/e-wacana/">UTHM e-News</a></li>
+                    <li><a href="https://wecare.uthm.edu.my/">UTHM WeCare</a></li>
+                </ul>
+            </div>
+
+            <!-- Tengah Kanan: Related Links -->
+            <div class="footer-col">
+                <h4>Related Links</h4>
+                <ul>
+                    <li><a href="http://perpun.upm.edu.my/myuninet/">My UniNet</a></li>
+                    <li><a href="https://www.pnm.gov.my/">National Library of Malaysia</a></li>
+                    <li><a href="https://www.u-library.gov.my/portal/web/guest/home">u-Pustaka</a></li>
+                    <li><a href="https://kik.pnm.gov.my/index.php/en/">Katalog Induk Kebangsaan (KIK)</a></li>
+                    <li><a href="https://ppaj.johor.gov.my/">Perbadanan Perpustakaan Awam Johor</a></li>
+                </ul>
+            </div>
+
+            <!-- Kanan: Follow Us -->
+            <div class="footer-col footer-social-col">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/PTTAUTHM" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.instagram.com/pttauthm/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@pttauthm?lang=en" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@pttauthm9142/featured" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    <li><a href="https://twitter.com/pttauthm" target="_blank"><i class="fab fa-x-twitter"></i> X (Twitter)</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="https://library.uthm.edu.my/privacy.html">Privacy</a> |
+                <a href="https://library.uthm.edu.my/disclaimer.html">Disclaimer</a> |
+                <a href="https://library.uthm.edu.my/copyright.html">Copyright</a> |
+                <a href="https://library.uthm.edu.my/rules-regulations.html">Rules &amp; Regulations</a>
+            </div>
+            <p>Copyright &copy; 2026 by Perpustakaan Tunku Tun Aminah, UTHM. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

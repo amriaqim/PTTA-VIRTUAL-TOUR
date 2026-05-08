@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>UTHM Library | MAPS</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-center">
+			<a href="index.html">HOME</a> 
+		<div class="dropdown">
+			<a href="#" class="dropbtn">FLOOR LEVELS &#9662;</a>
+			<div class="dropdown-content">
+				<a href="Aras 1.html">LEVEL 1</a>
+				<a href="Aras 2.html">LEVEL 2</a>
+				<a href="Aras 3.html">LEVEL 3</a>
+				<a href="Aras 4.html">LEVEL 4</a>
+			</div>
+		</div>
+            <a href="Maps.html" class="active">MAPS</a>
+            <a href="Team.html">TEAM</a>
+        </div>
+    </nav>
+
+	<header class="hero-banner" style="background-image: url('Aras 1.jpg');">
+    <h1>Find Your Way Around</h1>
+    <h2>Navigate every floor of Perpustakaan Tunku Tun Aminah — rooms, facilities, and directions all in one place.</h2>
+</header>
+
+
+    <main class="maps-container">
+        <section class="map-box">
+            <h3>Campus Location</h3>
+            <div class="iframe-container">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.7223481248175!2d103.0795049749668!3d1.857260598125779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d05eaa459d0ab9%3A0x495f817bef16f0a1!2sUniversiti%20Tun%20Hussein%20Onn%20Malaysia%20(UTHM)!5e0!3m2!1sen!2smy!4v1777116823275!5m2!1sen!2smy" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</div>
+        </section>
+
+		<section class="directory-section">
+				<h3>Floor Directory</h3>
+
+				<!-- ===== ARAS 1 ===== -->
+				<div class="floor-bar">Aras 1</div>
+				<div class="floor-row">
+					<div class="floor-image">
+						<img src="Projek/Global/Floor Plan 1.webp" alt="Aras 1">
+					</div>
+					<div class="room-grid">
+						<div class="room-card" onclick="goToRoom('Aras 1.html', 'Reakreasi')">
+							<h4>Recreation Space</h4>
+							<p>Free relaxation area with games & light gym equipment. Open Mon–Fri, 9am–5pm.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 1.html', 'Thesis')">
+							<h4>Closed Reference Room</h4>
+							<p>Houses 10,000+ UTHM theses for on-site reference. Capacity: 50 users.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ARAS 2 ===== -->
+				<div class="floor-bar">Aras 2</div>
+				<div class="floor-row">
+					<div class="floor-image">
+						<img src="Projek/Global/Floor Plan 2.webp" alt="Aras 2">
+					</div>
+					<div class="room-grid">
+						<div class="room-card" onclick="goToRoom('Aras 2.html', 'Sister Zone')">
+							<h4>Sister Zone</h4>
+							<p>Women-only rest and wellness space with sofas, bean bags, and carpeted flooring.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 2.html', 'Hikmah')">
+							<h4>Hikmah Room</h4>
+							<p>Private study rooms for 4–6 users. Select rooms have computers & LCD projectors.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 2.html', 'Iqra')">
+							<h4>Iqra Room</h4>
+							<p>118 individual study rooms across Level 2 & 4. Available at RM20/month.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 2.html', 'Remote Pilot Classroom')">
+							<h4>Remote Pilot Smart Classroom</h4>
+							<p>Modern smart learning space with structured and relaxed seating zones.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 2.html', 'Makmal AI')">
+							<h4>AI Lab Room</h4>
+							<p>Smart collaboration space for virtual meetings & training. Capacity: 15 users.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ARAS 3 ===== -->
+				<div class="floor-bar">Aras 3</div>
+				<div class="floor-row">
+					<div class="floor-image">
+						<img src="Projek/Global/Floor Plan 3.webp" alt="Aras 3">
+					</div>
+					<div class="room-grid">
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Makers Space')">
+							<h4>Makerspace</h4>
+							<p>Creative hub for workshops, robotics, and hands-on innovative projects.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'The Interactive Learning Space')">
+							<h4>The Interactive Learning Space</h4>
+							<p>Digital workspace with 66 workstations powered by VDI technology.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Inspire Lab')">
+							<h4>Inspire Lab</h4>
+							<p>Lounge-style study space with 18 laptops, printer, Wi-Fi & power outlets.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Lestari 1')">
+							<h4>Lestari Room 1</h4>
+							<p>Seminar & conference room with long tables and LCD projector. Capacity: 50.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Lestari 2')">
+							<h4>Lestari Room 2</h4>
+							<p>Collaborative seminar room with round-table layout and LCD projector. Capacity: 50.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Al-Jazari')">
+							<h4>Al-Jazari Auditorium</h4>
+							<p>Main auditorium for lectures, conferences & events. Capacity: 150 users.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Lestari Lounge')">
+							<h4>Lestari Lounge</h4>
+							<p>Dining area for library users to take a break and have meals.</p>
+						</div>
+						<div class="room-card" onclick="goToRoom('Aras 3.html', 'Eksplorasi')">
+							<h4>Eksplorasi Room</h4>
+							<p>Group discussion rooms for 6–12 users. Select rooms have computers & LCD projectors.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ARAS 4 ===== -->
+				<div class="floor-bar">Aras 4</div>
+				<div class="floor-row">
+					<div class="floor-image">
+						<img src="Projek/Global/Floor Plan 4.webp" alt="Aras 4">
+					</div>
+					<div class="room-grid">
+						<div class="room-card" onclick="goToRoom('Aras 4.html', 'Serambi Al-Quran')">
+							<h4>Serambi Al-Quran</h4>
+							<p>Quiet spiritual space for Quranic reading, prayer & reflection. Free for all users.</p>
+						</div>
+					</div>
+				</div>
+
+            </section>
+
+ <section class="info-grid">
+            <div class="info-box">
+                <div class="info-icon-wrap">
+                    <i class="fas fa-clock info-fa-icon"></i>
+                </div>
+                <h3>Operating Hours</h3>
+                <div class="info-table">
+                    <div class="info-row hours-header">
+                        <span>Day</span>
+                        <span>Lecture Week</span>
+                        <span>Study & Exam Week</span>
+                        <span>Semester Break</span>
+                    </div>
+                    <div class="info-row hours-row">
+                        <span>Monday – Thursday</span>
+                        <span>8.00 am – 10.00 pm</span>
+                        <span>8.00 am – 10.00 pm</span>
+                        <span>8.00 am – 5.00 pm</span>
+                    </div>
+                    <div class="info-row hours-row">
+                        <span>Friday</span>
+                        <span>8.00 am – 12.15 pm<br>2.45 pm – 10.00 pm</span>
+                        <span>8.00 am – 12.15 pm<br>2.45 pm – 10.00 pm</span>
+                        <span>8.00 am – 12.15 pm<br>2.45 pm – 5.00 pm</span>
+                    </div>
+                    <div class="info-row hours-row">
+                        <span>Saturday</span>
+                        <span class="closed-tag">Closed</span>
+                        <span>8.00 am – 5.00 pm</span>
+                        <span class="closed-tag">Closed</span>
+                    </div>
+                    <div class="info-row hours-row">
+                        <span>Sunday</span>
+                        <span class="closed-tag">Closed</span>
+                        <span>8.00 am – 5.00 pm</span>
+                        <span class="closed-tag">Closed</span>
+                    </div>
+                    <div class="info-row hours-row holiday">
+                        <span>Public Holiday</span>
+                        <span class="closed-tag" style="grid-column: span 3; text-align:center;">Closed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-icon-wrap">
+                    <i class="fas fa-phone-alt info-fa-icon"></i>
+                </div>
+                <h3>Contact Us</h3>
+                <div class="info-table">
+                    <div class="info-row">
+                        <span><i class="fas fa-phone fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>General Line</span>
+                        <span>+607-453 3318</span>
+                    </div>
+                    <div class="info-row">
+                        <span><i class="fas fa-fax fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>Fax</span>
+                        <span>+607-453 3199</span>
+                    </div>
+                    <div class="info-row">
+                        <span><i class="fas fa-envelope fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>Email</span>
+                        <span><a href="mailto:library@uthm.edu.my">library@uthm.edu.my</a></span>
+                    </div>
+                    <div class="info-row">
+                        <span><i class="fas fa-map-marker-alt fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>Location</span>
+                        <span>86400 Parit Raja, Batu Pahat, Johor</span>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-icon-wrap">
+                    <i class="fas fa-route info-fa-icon"></i>
+                </div>
+                <h3>Getting Here</h3>
+                <div class="info-table">
+                    <div class="info-row">
+                        <span><i class="fas fa-bus fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>On Campus</span>
+                        <span>UTHM Campus Bus — stops directly in front of the library</span>
+                    </div>
+                    <div class="info-row">
+                        <span><i class="fas fa-car fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>By Car</span>
+                        <span>Parking available at Lot P3 & P4 near the main entrance</span>
+                    </div>
+                    <div class="info-row">
+                        <span><i class="fas fa-walking fa-fw" style="color:#1e3a8a;margin-right:6px;"></i>On Foot</span>
+                        <span>5-minute walk from the main academic blocks</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+        // Fungsi untuk menghantar pengguna ke page Aras dan set bilik
+        function goToRoom(pageUrl, roomId) {
+            // Kita bina URL dengan parameter, contoh: Aras 2.html?room=Makmal AI
+            window.location.href = pageUrl + "?room=" + encodeURIComponent(roomId);
+        }
+
+        // Nav Scroll Effect
+        window.addEventListener("scroll", function() {
+            const nav = document.querySelector(".main-nav");
+            if (window.scrollY > 50) {
+                nav.classList.add("scrolled");
+            } else {
+                nav.classList.remove("scrolled");
+            }
+        });
+    </script>
+	
+   <footer>
+        <div class="footer-main">
+
+            <!-- Kiri: Logo + Info -->
+            <div class="footer-brand">
+                <img src="Projek/Global/Logo.png" alt="UTHM Logo" class="footer-logo-img">
+                <div class="footer-brand-info">
+                    <p><strong>Perpustakaan Tunku Tun Aminah</strong></p>
+                    <p>Universiti Tun Hussein Onn Malaysia (UTHM),</p>
+                    <p>86400 Parit Raja, Batu Pahat, Johor, Malaysia.</p>
+                    <p>Phone : +607-4533318</p>
+                    <p>Fax : +607-4533199</p>
+                    <p>E-mail : <a href="mailto:library@uthm.edu.my">library@uthm.edu.my</a></p>
+                </div>
+            </div>
+
+            <!-- Tengah Kiri: UTHM Links -->
+            <div class="footer-col">
+                <h4>UTHM Links</h4>
+                <ul>
+                    <li><a href="https://www.uthm.edu.my/en/">UTHM Website</a></li>
+                    <li><a href="https://penerbit.uthm.edu.my/ojs/">UTHM Journals</a></li>
+                    <li><a href="https://publisher.uthm.edu.my/periodicals/">UTHM Periodicals</a></li>
+                    <li><a href="http://e-bookstore.uthm.edu.my/">UTHM e-Bookstore</a></li>
+                    <li><a href="https://news.uthm.edu.my/ms/e-wacana/">UTHM e-News</a></li>
+                    <li><a href="https://wecare.uthm.edu.my/">UTHM WeCare</a></li>
+                </ul>
+            </div>
+
+            <!-- Tengah Kanan: Related Links -->
+            <div class="footer-col">
+                <h4>Related Links</h4>
+                <ul>
+                    <li><a href="http://perpun.upm.edu.my/myuninet/">My UniNet</a></li>
+                    <li><a href="https://www.pnm.gov.my/">National Library of Malaysia</a></li>
+                    <li><a href="https://www.u-library.gov.my/portal/web/guest/home">u-Pustaka</a></li>
+                    <li><a href="https://kik.pnm.gov.my/index.php/en/">Katalog Induk Kebangsaan (KIK)</a></li>
+                    <li><a href="https://ppaj.johor.gov.my/">Perbadanan Perpustakaan Awam Johor</a></li>
+                </ul>
+            </div>
+
+            <!-- Kanan: Follow Us -->
+            <div class="footer-col footer-social-col">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/PTTAUTHM" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://www.instagram.com/pttauthm/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@pttauthm?lang=en" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@pttauthm9142/featured" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    <li><a href="https://twitter.com/pttauthm" target="_blank"><i class="fab fa-x-twitter"></i> X (Twitter)</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="https://library.uthm.edu.my/privacy.html">Privacy</a> |
+                <a href="https://library.uthm.edu.my/disclaimer.html">Disclaimer</a> |
+                <a href="https://library.uthm.edu.my/copyright.html">Copyright</a> |
+                <a href="https://library.uthm.edu.my/rules-regulations.html">Rules &amp; Regulations</a>
+            </div>
+            <p>Copyright &copy; 2026 by Perpustakaan Tunku Tun Aminah, UTHM. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

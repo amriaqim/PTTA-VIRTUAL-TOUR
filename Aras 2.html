@@ -420,6 +420,31 @@ videoArea.appendChild(videoGrid);
             });
         });
 
+    // Hamburger Menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+    const mobileFloorBtn = document.getElementById('mobileFloorBtn');
+    const mobileFloorSub = document.getElementById('mobileFloorSub');
+    const floorArrow = document.getElementById('floorArrow');
+
+    hamburgerBtn.addEventListener('click', function() {
+        this.classList.toggle('open');
+        mobileNavMenu.classList.toggle('open');
+    });
+
+    mobileFloorBtn.addEventListener('click', function() {
+        mobileFloorSub.classList.toggle('open');
+        floorArrow.textContent = mobileFloorSub.classList.contains('open') ? '▴' : '▾';
+    });
+
+    // Tutup menu bila klik luar
+    document.addEventListener('click', function(e) {
+        if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target)) {
+            hamburgerBtn.classList.remove('open');
+            mobileNavMenu.classList.remove('open');
+        }
+    });
+
         function applyFilter() {
             roomCells.forEach(cell => {
                 if (activeFilters.size === 0) {

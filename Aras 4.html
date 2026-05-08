@@ -60,21 +60,29 @@
 
 <section class="viewer-content">
 		<!-- Container untuk Video (Boleh jadi banyak) -->
-		<div id="video-area" class="viewer-video-box">
-			<iframe id="room-video" width="100%" height="600px" src="" frameborder="0" allowfullscreen></iframe>
-		</div>
+			<div id="video-area" class="viewer-video-box" style="display:none;">
+				<iframe id="room-video" width="100%" height="600px" src="" frameborder="0" allowfullscreen></iframe>
+				<div class="watermark">
+					<img src="Projek/Global/Watermark.png" alt="watermark">
+				</div>
+			</div>
 	
-		<!-- Container untuk Panorama (Boleh jadi banyak) -->
-		<div id="panorama-area">
+		<!-- Container untuk Panorama -->
+		<div id="panorama-area" style="display:none; position:relative;">
 			<div id="panorama" style="width: 100%; height: 600px; border-radius: 8px;"></div>
+			<div class="watermark">
+				<img src="Projek/Global/Watermark.png" alt="watermark">
+			</div>
 		</div>
 
 		<h2 id="room-title">Nama Bilik</h2>
 		<p id="room-desc">Deskripsi bilik...</p>
+
 			
 		<div class="thumbnails-row">
-		<div class="thumb-card" data-id="Serambi Al-Quran"><img src="Aras 1.jpg"><p>Serambi Al-Quran</p></div>
+		<div class="thumb-card" data-id="Serambi Al-Quran"><img src="Projek\Thumbnail\Serambi Al-Quran.png"><p>Serambi Al-Quran</p></div>
 	</div>
+
 	
     </section>
 	
@@ -112,88 +120,115 @@
     let viewer1 = null;
     let viewer2 = null;
 
-    function updateRoomView(id) {
-        const data = roomData[id];
-        const videoArea = document.getElementById('video-area');
-        const panoramaArea = document.getElementById('panorama-area');
+function updateRoomView(id) {
+    const data = roomData[id];
+    const videoArea = document.getElementById('video-area');
+    const panoramaArea = document.getElementById('panorama-area');
 
-        // Reset kandungan asal
-        videoArea.innerHTML = '';
-        panoramaArea.innerHTML = '';
-        if (viewer1) { viewer1.destroy(); viewer1 = null; }
-        if (viewer2) { viewer2.destroy(); viewer2 = null; }
+    // Reset — sembunyikan dulu
+    videoArea.style.display = 'none';
+    panoramaArea.style.display = 'none';
+    videoArea.innerHTML = '';
+    panoramaArea.innerHTML = '';
+    if (viewer1) { viewer1.destroy(); viewer1 = null; }
+    if (viewer2) { viewer2.destroy(); viewer2 = null; }
 
-        document.getElementById('room-title').innerText = data.title;
-        const descEl = document.getElementById('room-desc');
-        if (data.infoCard) { descEl.innerHTML = data.infoCard; } else { descEl.innerHTML = data.desc; }
+    // Tunjukkan semula selepas reset
+    videoArea.style.display = 'block';
+    panoramaArea.style.display = 'block';
 
-        if (data.isMulti) {
-		// BUAT CONTAINER GRID
-		const videoGrid = document.createElement('div');
-		videoGrid.className = 'video-grid';
+    document.getElementById('room-title').innerText = data.title;
+    const descEl = document.getElementById('room-desc');
+    if (data.infoCard) { descEl.innerHTML = data.infoCard; } else { descEl.innerHTML = data.desc; }
 
-		// LOOP VIDEO MASUK DALAM GRID
-		data.videos.forEach((vSrc) => {
-		const ifrm = document.createElement('iframe');
-		ifrm.src = vSrc;
-		ifrm.setAttribute("frameborder", "0");
-		ifrm.setAttribute("allowfullscreen", "true");
-		videoGrid.appendChild(ifrm);
-});
+    if (data.isMulti) {
+        // Video grid
+        const videoGrid = document.createElement('div');
+        videoGrid.className = 'video-grid';
+        data.videos.forEach((vSrc) => {
+            const ifrm = document.createElement('iframe');
+            ifrm.src = vSrc;
+            ifrm.setAttribute("frameborder", "0");
+            ifrm.setAttribute("allowfullscreen", "true");
+            videoGrid.appendChild(ifrm);
+        });
+        videoArea.appendChild(videoGrid);
 
-// MASUKKAN GRID KE VIDEO AREA
-videoArea.appendChild(videoGrid);
+        // ✅ WATERMARK untuk video area (isMulti)
+        const wmVideo = document.createElement('div');
+        wmVideo.className = 'watermark';
+        wmVideo.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        videoArea.appendChild(wmVideo);
 
-            // BUAT 2 RUANG PANORAMA
-            const div1 = document.createElement('div');
-            div1.id = 'pano1';
-            div1.style.height = '650px';
-            div1.style.marginBottom = '25px';
-            div1.style.borderRadius = '10px';
-            panoramaArea.appendChild(div1);
-            
-            const div2 = document.createElement('div');
-            div2.id = 'pano2';
-            div2.style.height = '650px';
-            div2.style.borderRadius = '10px';
-            panoramaArea.appendChild(div2);
+        // Panorama 1
+        const div1 = document.createElement('div');
+        div1.id = 'pano1';
+        div1.style.height = '650px';
+        div1.style.marginBottom = '25px';
+        div1.style.borderRadius = '10px';
+        panoramaArea.appendChild(div1);
 
-            viewer1 = pannellum.viewer('pano1', {
-                "type": "equirectangular",
-                "panorama": data.scenes.sudutA.panorama,
-                "autoLoad": true,
-                "title": "Sudut Pandangan A"
-            });
+        // Panorama 2
+        const div2 = document.createElement('div');
+        div2.id = 'pano2';
+        div2.style.height = '650px';
+        div2.style.borderRadius = '10px';
+        panoramaArea.appendChild(div2);
 
-            viewer2 = pannellum.viewer('pano2', {
-                "type": "equirectangular",
-                "panorama": data.scenes.sudutB.panorama,
-                "autoLoad": true,
-                "title": "Sudut Pandangan B"
-            });
+        // ✅ WATERMARK untuk panorama area (isMulti) — letak sekali je kat bawah sekali
+        const wmPano = document.createElement('div');
+        wmPano.className = 'watermark';
+        wmPano.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        panoramaArea.appendChild(wmPano);
 
-        } else {
-            // LOGIK ASAL (1 RUANG)
-			const ifrm = document.createElement('iframe');
-				ifrm.src = data.video;
-				ifrm.width = "100%";
-				ifrm.height = "650px"; // TUKAR DARI 400px KE 600px
-				ifrm.setAttribute("frameborder", "0");
-				ifrm.setAttribute("allowfullscreen", "true");
-				videoArea.appendChild(ifrm);
+        viewer1 = pannellum.viewer('pano1', {
+            "type": "equirectangular",
+            "panorama": data.scenes.sudutA.panorama,
+            "autoLoad": true,
+            "title": "Sudut Pandangan A"
+        });
 
-            const divPano = document.createElement('div');
-            divPano.id = 'panorama';
-            divPano.style.height = '650px';
-            divPano.style.borderRadius = '8px';
-            panoramaArea.appendChild(divPano);
+        viewer2 = pannellum.viewer('pano2', {
+            "type": "equirectangular",
+            "panorama": data.scenes.sudutB.panorama,
+            "autoLoad": true,
+            "title": "Sudut Pandangan B"
+        });
 
-            viewer1 = pannellum.viewer('panorama', {
-                "type": "equirectangular",
-                "panorama": data.image,
-                "autoLoad": true
-            });
-        }
+    } else {
+        // Single video
+        const ifrm = document.createElement('iframe');
+        ifrm.src = data.video;
+        ifrm.width = "100%";
+        ifrm.setAttribute("frameborder", "0");
+        ifrm.setAttribute("allowfullscreen", "true");
+        videoArea.appendChild(ifrm);
+
+        // ✅ WATERMARK untuk video area (single)
+        const wmVideo = document.createElement('div');
+        wmVideo.className = 'watermark';
+        wmVideo.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        videoArea.appendChild(wmVideo);
+
+        // Single panorama
+        const divPano = document.createElement('div');
+        divPano.id = 'panorama';
+        divPano.style.height = '650px';
+        divPano.style.borderRadius = '8px';
+        panoramaArea.appendChild(divPano);
+
+        // ✅ WATERMARK untuk panorama area (single)
+        const wmPano = document.createElement('div');
+        wmPano.className = 'watermark';
+        wmPano.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        panoramaArea.appendChild(wmPano);
+
+        viewer1 = pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": data.image,
+            "autoLoad": true
+        });
+    }
 
         // Sync Active Class
         document.querySelectorAll('.room-item-card, .thumb-card').forEach(i => {

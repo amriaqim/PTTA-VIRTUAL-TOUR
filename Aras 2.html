@@ -63,25 +63,33 @@
 
 <section class="viewer-content">
 		<!-- Container untuk Video (Boleh jadi banyak) -->
-		<div id="video-area" class="viewer-video-box">
-			<iframe id="room-video" width="100%" height="600px" src="" frameborder="0" allowfullscreen></iframe>
-		</div>
+			<div id="video-area" class="viewer-video-box" style="display:none;">
+				<iframe id="room-video" width="100%" src="" frameborder="0" allowfullscreen></iframe>
+				<div class="watermark">
+					<img src="Projek/Global/Watermark.png" alt="watermark">
+				</div>
+			</div>
 	
-		<!-- Container untuk Panorama (Boleh jadi banyak) -->
-		<div id="panorama-area">
+		<!-- Container untuk Panorama -->
+		<div id="panorama-area" style="display:none; position:relative;">
 			<div id="panorama" style="width: 100%; height: 600px; border-radius: 8px;"></div>
+			<div class="watermark">
+				<img src="Projek/Global/Watermark.png" alt="watermark">
+			</div>
 		</div>
 
 		<h2 id="room-title">Nama Bilik</h2>
 		<p id="room-desc">Deskripsi bilik...</p>
 			
 		<div class="thumbnails-row">
-		<div class="thumb-card" data-id="Sister Zone"><img src="Aras 1.jpg"><p>Sister Zone</p></div>
-		<div class="thumb-card" data-id="Hikmah"><img src="Aras 2.jpg"><p>Hikmah Room</p></div>
-		<div class="thumb-card" data-id="Iqra"><img src="Aras 1.jpg"><p>Iqra Room</p></div>
-		<div class="thumb-card" data-id="Remote Pilot Classroom"><img src="Aras 2.jpg"><p>Remote Pilot Classroom</p></div>
-		<div class="thumb-card" data-id="Makmal AI"><img src="Aras 1.jpg"><p>AI Lab Room</p></div>
+		<div class="thumb-card" data-id="Sister Zone"><img src="Projek\Thumbnail\Sister Zone.png"><p>Sister Zone</p></div>
+		<div class="thumb-card" data-id="Hikmah"><img src="Projek\Thumbnail\Hikmah Room.png"><p>Hikmah Room</p></div>
+		<div class="thumb-card" data-id="Iqra"><img src="Projek\Thumbnail\Iqra Room.png"><p>Iqra Room</p></div>
+		<div class="thumb-card" data-id="Remote Pilot Classroom"><img src="Projek\Thumbnail\Remote Pilot Smart Classroom.png"><p>Remote Pilot Classroom</p></div>
+		<div class="thumb-card" data-id="Makmal AI"><img src="Projek\Thumbnail\Ai Lab Room.png"><p>AI Lab Room</p></div>
 	</div>
+	
+
 	
     </section>
 	
@@ -253,94 +261,131 @@
     let viewer1 = null;
     let viewer2 = null;
 
-    function updateRoomView(id) {
-        const data = roomData[id];
-        const videoArea = document.getElementById('video-area');
-        const panoramaArea = document.getElementById('panorama-area');
+function updateRoomView(id) {
+    const data = roomData[id];
+    const videoArea = document.getElementById('video-area');
+    const panoramaArea = document.getElementById('panorama-area');
 
-        // Reset kandungan asal
-        videoArea.innerHTML = '';
-        panoramaArea.innerHTML = '';
-        if (viewer1) { viewer1.destroy(); viewer1 = null; }
-        if (viewer2) { viewer2.destroy(); viewer2 = null; }
+    // Reset — sembunyikan dulu
+    videoArea.style.display = 'none';
+    panoramaArea.style.display = 'none';
+    videoArea.innerHTML = '';
+    panoramaArea.innerHTML = '';
+    if (viewer1) { viewer1.destroy(); viewer1 = null; }
+    if (viewer2) { viewer2.destroy(); viewer2 = null; }
 
-        document.getElementById('room-title').innerText = data.title;
-        const descEl = document.getElementById('room-desc');
-        if (data.infoCard) {
-            descEl.innerHTML = data.infoCard;
-            // Init filter selepas HTML dimasukkan
-            setTimeout(() => initRoomFilter(), 50);
-        } else {
-            descEl.innerHTML = data.desc;
-        }
+    // Tunjukkan semula selepas reset
+    videoArea.style.display = 'block';
+    panoramaArea.style.display = 'block';
 
-        if (data.isMulti) {
-		// BUAT CONTAINER GRID
-		const videoGrid = document.createElement('div');
-		videoGrid.className = 'video-grid';
+    document.getElementById('room-title').innerText = data.title;
+    const descEl = document.getElementById('room-desc');
+    if (data.infoCard) { descEl.innerHTML = data.infoCard; } else { descEl.innerHTML = data.desc; }
 
-		// LOOP VIDEO MASUK DALAM GRID
-		data.videos.forEach((vSrc) => {
-		const ifrm = document.createElement('iframe');
-		ifrm.src = vSrc;
-		ifrm.setAttribute("frameborder", "0");
-		ifrm.setAttribute("allowfullscreen", "true");
-		videoGrid.appendChild(ifrm);
-});
+    if (data.isMulti) {
+        // Video grid
+        const videoGrid = document.createElement('div');
+        videoGrid.className = 'video-grid';
+        data.videos.forEach((vSrc) => {
+            // Wrap setiap video dalam div relative supaya watermark boleh overlay
+            const videoWrap = document.createElement('div');
+            videoWrap.style.position = 'relative';
 
-// MASUKKAN GRID KE VIDEO AREA
-videoArea.appendChild(videoGrid);
+            const ifrm = document.createElement('iframe');
+            ifrm.src = vSrc;
+            ifrm.setAttribute("frameborder", "0");
+            ifrm.setAttribute("allowfullscreen", "true");
 
-            // BUAT 2 RUANG PANORAMA
-            const div1 = document.createElement('div');
-            div1.id = 'pano1';
-            div1.style.height = '650px';
-            div1.style.marginBottom = '25px';
-            div1.style.borderRadius = '10px';
-            panoramaArea.appendChild(div1);
-            
-            const div2 = document.createElement('div');
-            div2.id = 'pano2';
-            div2.style.height = '650px';
-            div2.style.borderRadius = '10px';
-            panoramaArea.appendChild(div2);
+            // ✅ WATERMARK untuk setiap video
+            const wmEach = document.createElement('div');
+            wmEach.className = 'watermark';
+            wmEach.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
 
-            viewer1 = pannellum.viewer('pano1', {
-                "type": "equirectangular",
-                "panorama": data.scenes.sudutA.panorama,
-                "autoLoad": true,
-                "title": "Sudut Pandangan A"
-            });
+            videoWrap.appendChild(ifrm);
+            videoWrap.appendChild(wmEach);
+            videoGrid.appendChild(videoWrap);
+        });
+        videoArea.appendChild(videoGrid);
 
-            viewer2 = pannellum.viewer('pano2', {
-                "type": "equirectangular",
-                "panorama": data.scenes.sudutB.panorama,
-                "autoLoad": true,
-                "title": "Sudut Pandangan B"
-            });
+        // Panorama 1 — wrap dalam div relative + watermark sendiri
+        const wrap1 = document.createElement('div');
+        wrap1.style.position = 'relative';
+        wrap1.style.marginBottom = '25px';
+        const div1 = document.createElement('div');
+        div1.id = 'pano1';
+        div1.style.height = '650px';
+        div1.style.borderRadius = '10px';
+        const wmPano1 = document.createElement('div');
+        wmPano1.className = 'watermark';
+        wmPano1.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        wrap1.appendChild(div1);
+        wrap1.appendChild(wmPano1);
+        panoramaArea.appendChild(wrap1);
 
-        } else {
-            // LOGIK ASAL (1 RUANG)
-			const ifrm = document.createElement('iframe');
-				ifrm.src = data.video;
-				ifrm.width = "100%";
-				ifrm.height = "650px"; // TUKAR DARI 400px KE 600px
-				ifrm.setAttribute("frameborder", "0");
-				ifrm.setAttribute("allowfullscreen", "true");
-				videoArea.appendChild(ifrm);
+        // Panorama 2 — wrap dalam div relative + watermark sendiri
+        const wrap2 = document.createElement('div');
+        wrap2.style.position = 'relative';
+        const div2 = document.createElement('div');
+        div2.id = 'pano2';
+        div2.style.height = '650px';
+        div2.style.borderRadius = '10px';
+        const wmPano2 = document.createElement('div');
+        wmPano2.className = 'watermark';
+        wmPano2.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        wrap2.appendChild(div2);
+        wrap2.appendChild(wmPano2);
+        panoramaArea.appendChild(wrap2);
 
-            const divPano = document.createElement('div');
-            divPano.id = 'panorama';
-            divPano.style.height = '650px';
-            divPano.style.borderRadius = '8px';
-            panoramaArea.appendChild(divPano);
+        viewer1 = pannellum.viewer('pano1', {
+            "type": "equirectangular",
+            "panorama": data.scenes.sudutA.panorama,
+            "autoLoad": true,
+            "title": "Sudut Pandangan A"
+        });
 
-            viewer1 = pannellum.viewer('panorama', {
-                "type": "equirectangular",
-                "panorama": data.image,
-                "autoLoad": true
-            });
-        }
+        viewer2 = pannellum.viewer('pano2', {
+            "type": "equirectangular",
+            "panorama": data.scenes.sudutB.panorama,
+            "autoLoad": true,
+            "title": "Sudut Pandangan B"
+        });
+
+    } else {
+        // Single video
+        const ifrm = document.createElement('iframe');
+        ifrm.src = data.video;
+        ifrm.width = "100%";
+        ifrm.setAttribute("frameborder", "0");
+        ifrm.setAttribute("allowfullscreen", "true");
+        videoArea.appendChild(ifrm);
+
+        // ✅ WATERMARK untuk video area (single)
+        const wmVideo = document.createElement('div');
+        wmVideo.className = 'watermark';
+        wmVideo.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        videoArea.appendChild(wmVideo);
+
+        // Single panorama
+        const divPano = document.createElement('div');
+        divPano.id = 'panorama';
+        divPano.style.height = '650px';
+        divPano.style.borderRadius = '8px';
+        panoramaArea.appendChild(divPano);
+
+        // ✅ WATERMARK untuk panorama area (single)
+        const wmPano = document.createElement('div');
+        wmPano.className = 'watermark';
+        wmPano.innerHTML = '<img src="Projek/Global/Watermark.png" alt="watermark">';
+        panoramaArea.appendChild(wmPano);
+
+        viewer1 = pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": data.image,
+            "autoLoad": true
+        });
+    }
+
+
 
         // Sync Active Class
         document.querySelectorAll('.room-item-card, .thumb-card').forEach(i => {

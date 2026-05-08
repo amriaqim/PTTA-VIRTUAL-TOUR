@@ -120,30 +120,30 @@
             nav.classList.remove("scrolled");
         }
     }); // Pastikan ada penutup }); di sini
-
+ 
     // 2. Fungsi Carousel
-
+ 
  let slideIndex = 0;
     let slideTimer;
     const slides = document.getElementsByClassName("carousel-slide");
     const dots = document.getElementsByClassName("dot");
-
+ 
     showSlides(slideIndex);
-
+ 
     function currentSlide(n) {
         clearTimeout(slideTimer);
         showSlides(slideIndex = n);
     }
-
+ 
     function moveSlide(n) {
         clearTimeout(slideTimer);
         showSlides(slideIndex += n);
     }
-
+ 
     function showSlides(n) {
         if (n >= slides.length) { slideIndex = 0; }
         if (n < 0) { slideIndex = slides.length - 1; }
-
+ 
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
             dots[i].className = dots[i].className.replace(" active", ""); // Buang kelas active lama
@@ -151,10 +151,10 @@
             let v = slides[i].querySelector('video');
             if(v) { v.pause(); v.currentTime = 0; }
         }
-
+ 
         slides[slideIndex].style.display = "block";
         dots[slideIndex].className += " active"; // Tambah kelas active pada titik semasa
-
+ 
         let video = slides[slideIndex].querySelector('video');
         if (video) {
             video.play();
@@ -162,42 +162,31 @@
         } else {
             slideTimer = setTimeout(() => { moveSlide(1); }, 5000);
         }
-		// 1. Buang kelas 'active' daripada semua kad (sidebar & thumbnails)
-    document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
-        item.classList.remove('active');
-    });
-
+    }
+ 
     // Hamburger Menu
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileNavMenu = document.getElementById('mobileNavMenu');
     const mobileFloorBtn = document.getElementById('mobileFloorBtn');
     const mobileFloorSub = document.getElementById('mobileFloorSub');
     const floorArrow = document.getElementById('floorArrow');
-
+ 
     hamburgerBtn.addEventListener('click', function() {
         this.classList.toggle('open');
         mobileNavMenu.classList.toggle('open');
     });
-
+ 
     mobileFloorBtn.addEventListener('click', function() {
         mobileFloorSub.classList.toggle('open');
         floorArrow.textContent = mobileFloorSub.classList.contains('open') ? '▴' : '▾';
     });
-
-    // Tutup menu bila klik luar
+ 
     document.addEventListener('click', function(e) {
         if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target)) {
             hamburgerBtn.classList.remove('open');
             mobileNavMenu.classList.remove('open');
         }
     });
-
-    // 2. Tambah kelas 'active' kepada SEMUA elemen yang sepadan dengan id bilik sekarang
-    const activeElements = document.querySelectorAll(`[data-id="${id}"]`);
-    activeElements.forEach(el => {
-        el.classList.add('active');
-    });
-    }
 </script>
    <footer>
         <div class="footer-main">

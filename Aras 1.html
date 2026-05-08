@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>UTHM Library | LEVELS 1</title>
     <link rel="stylesheet" href="style.css">
@@ -12,7 +13,10 @@
 <body>
 
     <nav class="main-nav">
-        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/Logo.png" class="nav-logo"></a>
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button></div>
         <div class="nav-center">
 			<a href="index.html">HOME</a> 
 			<div class="dropdown">
@@ -28,6 +32,19 @@
 			<a href="Team.html">TEAM</a>
 		</div>
 		</nav>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="Halaman_Utama.html">HOME</a>
+        <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
+        <div class="mobile-submenu" id="mobileFloorSub">
+            <a href="Aras_1.html" class="active">LEVEL 1</a>
+            <a href="Aras_2.html">LEVEL 2</a>
+            <a href="Aras_3.html">LEVEL 3</a>
+            <a href="Aras_4.html">LEVEL 4</a>
+        </div>
+        <a href="Maps.html">MAPS</a>
+        <a href="Team.html">TEAM</a>
+    </div>
 
 	<header class="hero-banner" style="background-image: url('Aras 1.jpg');">
     <h1>LEVEL 1 — EXPLORE & DISCOVERE</h1>
@@ -69,7 +86,7 @@
             title: 'Recreation Space',
             desc: '',
             isMulti: true, 
-            videos: ['https://www.youtube.com/embed/9HJzHt82yxo?si=T9IFaHTCRL75g4fF','https://www.youtube.com/embed/9fDFfi0RMoI?si=tUwc-Ozop_GMc8KN'],
+            videos: ['Projek/Video/Reakreasi1.mp4','Projek/Video/Reakreasi2.mp4'],
             scenes: {
                 "sudutA": { "panorama": "Projek/Image/Reakreasi1.jpg" },
                 "sudutB": { "panorama": "Projek/Image/Reakreasi2.jpg" }
@@ -99,7 +116,7 @@
             title: 'Closed Reference Room',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/jQo1RQAkWc4?si=CIE1Ex8F0hk8OovD',
+            video: 'Projek/Video/Thesis.mp4',
             image: 'Projek/Image/Thesis.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 1</span>

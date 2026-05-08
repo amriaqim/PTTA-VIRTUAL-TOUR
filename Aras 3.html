@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>UTHM Library | LEVELS 3</title>
     <link rel="stylesheet" href="style.css">
@@ -11,7 +12,10 @@
 <body>
 
     <nav class="main-nav">
-        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/Logo.png" class="nav-logo"></a>
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button></div>
         <div class="nav-center">
 			<a href="index.html">HOME</a> 
 			<div class="dropdown">
@@ -27,6 +31,19 @@
 			<a href="Team.html">TEAM</a>
 		</div>
 		</nav>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="Halaman_Utama.html">HOME</a>
+        <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
+        <div class="mobile-submenu" id="mobileFloorSub">
+            <a href="Aras_1.html">LEVEL 1</a>
+            <a href="Aras_2.html">LEVEL 2</a>
+            <a href="Aras_3.html" class="active">LEVEL 3</a>
+            <a href="Aras_4.html">LEVEL 4</a>
+        </div>
+        <a href="Maps.html">MAPS</a>
+        <a href="Team.html">TEAM</a>
+    </div>
 
   
 	<header class="hero-banner" style="background-image: url('Aras 1.jpg');">
@@ -83,7 +100,7 @@
             title: 'Makerspace',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/g3iTRpiPcMg?si=BjZLfZEnsGiXx0tH',
+            video: 'Projek/Video/Makers Space.mp4',
             image: 'Projek/Image/Makers Space.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
@@ -133,7 +150,7 @@
             title: 'Inspire Lab',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/XE58MpaVhTI?si=u1J0qgBGogtZQkmg',
+            video: 'Projek/Video/Inspire Lab.mp4',
             image: 'Projek/Image/Inspire Lab.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
@@ -160,7 +177,7 @@
             title: 'Lestari Room 1',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/SYy86zBwdiU?si=bg8Qf9hM172GLnjn',
+            video: 'Projek/Video/Lestari1.mp4',
             image: 'Projek/Image/Lestari 1.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
@@ -185,7 +202,7 @@
             title: 'Lestari Room 2',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/LoPAnbVgd2k?si=jHzDNCLjgyE2WG_W',
+            video: 'Projek/Video/Lestari2.mp4',
             image: 'Projek/Image/Lestari 2.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
@@ -211,7 +228,7 @@
             desc: '',
             isMulti: false,
             video: 'https://www.youtube.com/embed/maxi9QFDwf0?si=zWbekim19JfcniRx',
-            image: 'https://drive.google.com/uc?export=view&id=1-VFdNqhRhgo2McVPwo8jsuKPU08MvDLJ',
+            image: 'Projek/Image/Al-Jazari.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
   <div class="ric-title">Al-Jazari Auditorium</div>
@@ -235,7 +252,7 @@
             title: 'Lestari Lounge',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/sGQHTwMkHS0?si=2K7CXRW-yzEbYNQR',
+            video: 'Projek/Video/Dewan Makan.mp4',
             image: 'Projek/Image/Dewan Makan.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 3</span>
@@ -257,7 +274,7 @@
             title: 'Eksplorasi Room', 
             desc: 'Aras 3 - Ruang perbincangan berkumpulan.', 
             isMulti: false,
-            video: 'https://www.youtube.com/embed/Vv0_Qwtqhyk?si=UH8KNMRPe9gAtl8t',
+            video: 'Projek/Video/Eksplorasi.mp4',
             image: 'Projek/Image/Eksplorasi.jpg',
             infoCard: `
 <div class="ric-wrap">

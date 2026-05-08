@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>UTHM Library | LEVELS 2</title>
     <link rel="stylesheet" href="style.css">
@@ -11,7 +12,10 @@
 <body>
 
     <nav class="main-nav">
-        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/Logo.png" class="nav-logo"></a>
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button></div>
         <div class="nav-center">
 			<a href="index.html">HOME</a> 
 			<div class="dropdown">
@@ -27,6 +31,19 @@
 			<a href="Team.html">TEAM</a>
 		</div>
 		</nav>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="Halaman_Utama.html">HOME</a>
+        <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
+        <div class="mobile-submenu" id="mobileFloorSub">
+            <a href="Aras_1.html">LEVEL 1</a>
+            <a href="Aras_2.html" class="active">LEVEL 2</a>
+            <a href="Aras_3.html">LEVEL 3</a>
+            <a href="Aras_4.html">LEVEL 4</a>
+        </div>
+        <a href="Maps.html">MAPS</a>
+        <a href="Team.html">TEAM</a>
+    </div>
 
 	<header class="hero-banner" style="background-image: url('Aras 1.jpg');">
     <h1>LEVEL 2 — STUDY, COLLABORATE & CREATE</h1>
@@ -101,7 +118,7 @@
             title: 'Hikmah Room', 
             desc: 'Aras 1 - Ruang privasi untuk perbincangan intensif.', 
             isMulti: false,
-            video: 'https://www.youtube.com/embed/HpzbFIBb2M0?si=YgfWiXS-_19MJItT',
+            video: 'Projek/Video/Hikmah.mp4',
             image: 'Projek/Image/Hikmah.jpg',
             infoCard: `
 <div class="ric-wrap">
@@ -160,7 +177,7 @@
             title: "Iqra Room'",
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/JORtR7oB5hM?si=1ZHVZxapd6GZI6ND',
+            video: 'Projek/Video/Iqra.mp4',
             image: 'Projek/Image/Iqra.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 2 & 4</span>
@@ -185,7 +202,7 @@
             title: 'Remote Pilot Smart Classroom',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/HwoCazkAlh8?si=oNx2xv-3gmb4KkPn',
+            video: 'Projek/Video/Remote Pilot.mp4',
             image: 'Projek/Image/Remote Pilot.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 2</span>
@@ -209,7 +226,7 @@
             title: 'AI Lab Room',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/WrX4FgDOrXI?si=gLqdl-OTU-rq2Y_k',
+            video: 'Projek/Video/Makmal AI.mp4',
             image: 'Projek/Image/Makmal AI.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 2</span>

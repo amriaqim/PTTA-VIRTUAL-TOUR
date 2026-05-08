@@ -10,7 +10,10 @@
 <body>
 
     <nav class="main-nav">
-        <div class="nav-left"><img src="Projek/Global/logo.png" class="nav-logo" onclick="location.href='index.html'" style="cursor:pointer;"></div>
+        <div class="nav-left"><img src="Projek/Global/Logo.png" class="nav-logo" onclick="location.href='index.html'" style="cursor:pointer;">
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button></div>
         <div class="nav-center">
 			<a href="index.html" class="active">HOME</a> 
 		<div class="dropdown">
@@ -26,6 +29,19 @@
 			<a href="Team.html">TEAM</a>
 		</div>
 		</nav>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="Halaman_Utama.html" class="active">HOME</a>
+        <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
+        <div class="mobile-submenu" id="mobileFloorSub">
+            <a href="Aras_1.html">LEVEL 1</a>
+            <a href="Aras_2.html">LEVEL 2</a>
+            <a href="Aras_3.html">LEVEL 3</a>
+            <a href="Aras_4.html">LEVEL 4</a>
+        </div>
+        <a href="Maps.html">MAPS</a>
+        <a href="Team.html">TEAM</a>
+    </div>
 
 	<header class="hero-banner" style="background-image: url('Projek/Global/uthm.png');">
         <h1>WELCOME TO UTHM LIBRARY FACILITIES</h1>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
 	<title>UTHM Library | TEAM</title>
     <link rel="stylesheet" href="style.css">
@@ -9,7 +10,10 @@
 <body>
 
     <nav class="main-nav">
-        <div class="nav-left"><a href="index.html"><img src="Projek/Global/logo.png" class="nav-logo"></a></div>
+        <div class="nav-left"><a href="index.html"><img src="Projek/Global/Logo.png" class="nav-logo"></a>
+        <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button></div>
         <div class="nav-center">
 			<a href="index.html">HOME</a> 
 		<div class="dropdown">
@@ -25,6 +29,19 @@
             <a href="Team.html" class="active">TEAM</a>
         </div>
     </nav>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="Halaman_Utama.html">HOME</a>
+        <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
+        <div class="mobile-submenu" id="mobileFloorSub">
+            <a href="Aras_1.html">LEVEL 1</a>
+            <a href="Aras_2.html">LEVEL 2</a>
+            <a href="Aras_3.html">LEVEL 3</a>
+            <a href="Aras_4.html">LEVEL 4</a>
+        </div>
+        <a href="Maps.html">MAPS</a>
+        <a href="Team.html" class="active">TEAM</a>
+    </div>
 
 	<header class="hero-banner" style="background-image: url('Projek/Footage/team.jpg');">
         <h1>MEET THE TEAM</h1>

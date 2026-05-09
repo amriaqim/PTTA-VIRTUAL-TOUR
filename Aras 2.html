@@ -280,7 +280,7 @@ function updateRoomView(id) {
 
     document.getElementById('room-title').innerText = data.title;
     const descEl = document.getElementById('room-desc');
-    if (data.infoCard) { descEl.innerHTML = data.infoCard; } else { descEl.innerHTML = data.desc; }
+    if (data.infoCard) { descEl.innerHTML = data.infoCard; initRoomFilter(); } else { descEl.innerHTML = data.desc; }
 
     if (data.isMulti) {
         // Video grid
@@ -443,6 +443,31 @@ function updateRoomView(id) {
 			});
 		});
 
+
+    // Hamburger Menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+    const mobileFloorBtn = document.getElementById('mobileFloorBtn');
+    const mobileFloorSub = document.getElementById('mobileFloorSub');
+    const floorArrow = document.getElementById('floorArrow');
+
+    hamburgerBtn.addEventListener('click', function() {
+        this.classList.toggle('open');
+        mobileNavMenu.classList.toggle('open');
+    });
+
+    mobileFloorBtn.addEventListener('click', function() {
+        mobileFloorSub.classList.toggle('open');
+        floorArrow.textContent = mobileFloorSub.classList.contains('open') ? '▴' : '▾';
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target)) {
+            hamburgerBtn.classList.remove('open');
+            mobileNavMenu.classList.remove('open');
+        }
+    });
+
     // ===== FILTER FUNCTION untuk Hikmah =====
     function initRoomFilter() {
         const filterBtns = document.querySelectorAll('.ric-fac[data-fac]');
@@ -482,29 +507,6 @@ function updateRoomView(id) {
         }
     }
 
-    // Hamburger Menu
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileNavMenu = document.getElementById('mobileNavMenu');
-    const mobileFloorBtn = document.getElementById('mobileFloorBtn');
-    const mobileFloorSub = document.getElementById('mobileFloorSub');
-    const floorArrow = document.getElementById('floorArrow');
-
-    hamburgerBtn.addEventListener('click', function() {
-        this.classList.toggle('open');
-        mobileNavMenu.classList.toggle('open');
-    });
-
-    mobileFloorBtn.addEventListener('click', function() {
-        mobileFloorSub.classList.toggle('open');
-        floorArrow.textContent = mobileFloorSub.classList.contains('open') ? '▴' : '▾';
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target)) {
-            hamburgerBtn.classList.remove('open');
-            mobileNavMenu.classList.remove('open');
-        }
-    });
 </script>
 
    <footer>

@@ -33,13 +33,13 @@
 		</nav>
     <!-- Mobile Nav Menu -->
     <div class="mobile-nav-menu" id="mobileNavMenu">
-        <a href="Halaman_Utama.html">HOME</a>
+        <a href="index.html">HOME</a>
         <div class="mobile-submenu-title" id="mobileFloorBtn">FLOOR LEVELS <span id="floorArrow">▾</span></div>
         <div class="mobile-submenu" id="mobileFloorSub">
-            <a href="Aras_1.html">LEVEL 1</a>
-            <a href="Aras_2.html">LEVEL 2</a>
-            <a href="Aras_3.html" class="active">LEVEL 3</a>
-            <a href="Aras_4.html">LEVEL 4</a>
+            <a href="Aras 1.html">LEVEL 1</a>
+            <a href="Aras 2.html">LEVEL 2</a>
+            <a href="Aras 3.html" class="active">LEVEL 3</a>
+            <a href="Aras 4.html">LEVEL 4</a>
         </div>
         <a href="Maps.html">MAPS</a>
         <a href="Team.html">TEAM</a>
@@ -550,25 +550,23 @@
     const mobileFloorBtn = document.getElementById('mobileFloorBtn');
     const mobileFloorSub = document.getElementById('mobileFloorSub');
     const floorArrow = document.getElementById('floorArrow');
-
+ 
     hamburgerBtn.addEventListener('click', function() {
         this.classList.toggle('open');
         mobileNavMenu.classList.toggle('open');
     });
-
+ 
     mobileFloorBtn.addEventListener('click', function() {
         mobileFloorSub.classList.toggle('open');
         floorArrow.textContent = mobileFloorSub.classList.contains('open') ? '▴' : '▾';
     });
-
-    // Tutup menu bila klik luar
+ 
     document.addEventListener('click', function(e) {
         if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target)) {
             hamburgerBtn.classList.remove('open');
             mobileNavMenu.classList.remove('open');
         }
     });
-
 
         function applyFilter() {
             roomCells.forEach(cell => {

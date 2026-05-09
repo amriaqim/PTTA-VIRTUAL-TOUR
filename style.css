@@ -81,6 +81,35 @@ h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; fon
     position: relative;
 }
 
+
+/* ==========================================
+   SEKSYEN VIDEO PROMOSI
+   ========================================== */
+.promo-video-section {
+    padding: 60px 5%;
+    text-align: center;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.promo-video-section h2 {
+    color: #1e3a8a;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.promo-video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.promo-video-wrapper video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    display: block;
+}
+
 /* ==========================================
    2. NAVIGATION & HEADER
    ========================================== */
@@ -337,8 +366,9 @@ footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
 .room-item-card:hover { border-color: #1e3a8a; }
 .room-item-card.active { background: #1e3a8a; color: white; }
 
-.viewer-content { flex: 3; }
-.viewer-video-box { background: #000; overflow: hidden; margin-bottom: 20px; border-radius: 8px; }
+.viewer-content { flex: 3; min-width: 0; width: 0; }
+.viewer-video-box { overflow: hidden; margin-bottom: 20px; border-radius: 8px; width: 100%; }
+
 
 /* Fail style.css */
 #panorama {

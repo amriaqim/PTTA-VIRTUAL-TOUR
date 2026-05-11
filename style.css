@@ -1,40 +1,331 @@
-/* ==========================================
-   1. GLOBAL & BASE STYLES
-   ========================================== */
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding-top: 80px; }
-a { text-decoration: none; color: inherit; }
-h1 { text-align: center; margin-bottom: 30px; font-size: 60px; color: White; }
-h2 { text-align: center; margin-bottom: 30px; font-size: 40px; color: #1e3a8a; }
-h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; font-weight: 900; }
-/* ==========================================
-   CAROUSEL SECTION
-   ========================================== */
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: 500px; /* Anda boleh adjust tinggi ikut kesesuaian */
-    overflow: hidden;
+/* ============================================================
+   UTHM LIBRARY VIRTUAL TOUR — STYLESHEET
+   Perpustakaan Tunku Tun Aminah, UTHM
+   ============================================================
+   SENARAI KANDUNGAN:
+    1.  GLOBAL & TYPOGRAPHY
+    2.  NAVIGATION BAR (Desktop)
+    3.  NAVIGATION BAR (Mobile — Hamburger)
+    4.  HERO BANNER
+    5.  CAROUSEL (index.html)
+    6.  PROMO VIDEO (index.html)
+    7.  FLOOR CARDS & FEATURES (index.html)
+    8.  360° TOUR — SIDEBAR & VIEWER (Aras 1–4)
+    9.  360° TOUR — THUMBNAILS
+   10.  360° TOUR — WATERMARK
+   11.  ROOM INFO CARD (ric-*)
+   12.  MAPS PAGE
+   13.  TEAM PAGE
+   14.  FOOTER
+   15.  RESPONSIVE / MEDIA QUERIES
+   ============================================================ */
+
+
+/* ============================================================
+   1. GLOBAL & TYPOGRAPHY
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar font atau warna teks am.
+   ============================================================ */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    padding-top: 80px;
 }
 
-.carousel-slide {
-    display: none; /* Sorok semua slide secara default */
-    width: 100%;
-    height: 100%;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.carousel-slide img, .carousel-slide video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 60px;
+    color: white;
 }
 
-/* Tunjukkan slide yang aktif */
-.active-slide {
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+    color: #1e3a8a;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: black;
+    font-weight: 900;
+}
+
+
+/* ============================================================
+   2. NAVIGATION BAR (Desktop)
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar warna, saiz, atau font nav bar.
+   ============================================================ */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 80px;
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+/* Efek kaca apabila scroll */
+.main-nav.scrolled {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.nav-logo {
+    height: 70px;
+    width: auto;
     display: block;
 }
 
-/* Gaya butang */
-.carousel-prev, .carousel-next {
+/* Nav links — dead center */
+.nav-center {
+    display: flex;
+    gap: 40px;
+    font-size: 22px;           /* ✏️ Saiz font link nav */
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+.nav-center a {
+    color: #004080;            /* ✏️ Warna link nav */
+    transition: color 0.3s ease;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.nav-center a:hover { color: #e11d48; }
+
+.nav-center a.active {
+    color: #e11d48;
+    font-weight: bold;
+    border-bottom: 2px solid #e11d48;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1100;
+    top: 100%;
+}
+
+.dropdown-content a {
+    color: #004080;
+    padding: 12px 16px;
+    display: block;
+    font-size: 16px;
+    border-bottom: none;
+}
+
+.dropdown-content a:hover { background-color: #f1f1f1; color: #e11d48; }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown .dropbtn { cursor: pointer; }
+
+
+/* ============================================================
+   3. NAVIGATION BAR (Mobile — Hamburger)
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar warna atau animasi menu mobile.
+       Hamburger muncul apabila skrin lebih kecil dari 768px.
+   ============================================================ */
+
+/* Butang hamburger ☰ — sembunyi pada desktop */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1200;
+    flex-shrink: 0;
+}
+
+/* 3 garis hamburger */
+.nav-hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #004080;       /* ✏️ Tukar warna garis */
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Animasi → silang (×) apabila menu terbuka */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Panel menu mobile */
+.mobile-nav-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 999;
+    padding: 16px 0 24px;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Link dalam menu mobile */
+.mobile-nav-menu a {
+    display: block;
+    padding: 14px 28px;
+    font-size: 18px;           /* ✏️ Saiz font link mobile */
+    font-weight: 600;
+    color: #004080;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s, color 0.2s;
+}
+
+.mobile-nav-menu a:last-child { border-bottom: none; }
+.mobile-nav-menu a:hover { background: #f8fafc; color: #e11d48; }
+.mobile-nav-menu a.active { color: #e11d48; font-weight: 700; }
+
+/* Tajuk "FLOOR LEVELS" dalam mobile */
+.mobile-submenu-title {
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #004080;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+    user-select: none;
+}
+
+.mobile-submenu-title:hover { background: #f8fafc; }
+
+/* Submenu Level 1–4 */
+.mobile-submenu {
+    display: none;
+    flex-direction: column;
+    background: #f8fafc;
+}
+
+.mobile-submenu.open { display: flex; }
+
+.mobile-submenu a {
+    padding: 12px 44px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.mobile-submenu a:hover { color: #e11d48; background: #fff0f3; }
+.mobile-submenu a.active { color: #e11d48; font-weight: 700; }
+
+
+/* ============================================================
+   4. HERO BANNER
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar warna overlay atau saiz teks.
+       Tukar nilai opacity (0.85) untuk lebih/kurang gelap.
+   ============================================================ */
+.hero-banner {
+    text-align: center;
+    padding: 80px 20px;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: rgba(30, 58, 138, 0.85); /* ✏️ Tukar opacity */
+}
+
+.hero-banner h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+    color: white;
+}
+
+
+/* ============================================================
+   5. CAROUSEL (index.html)
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar saiz atau warna carousel.
+   ============================================================ */
+.carousel-section { position: relative; }
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;             /* ✏️ Tukar tinggi carousel */
+    overflow: hidden;
+}
+
+.carousel-slide { display: none; width: 100%; height: 100%; }
+
+.carousel-slide img,
+.carousel-slide video { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-prev,
+.carousel-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -49,7 +340,6 @@ h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; fon
 .carousel-next { right: 0; }
 .carousel-prev { left: 0; }
 
-/* Container untuk titik */
 .carousel-dots {
     position: absolute;
     bottom: 20px;
@@ -60,31 +350,26 @@ h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; fon
     z-index: 20;
 }
 
-/* Gaya asal titik */
 .dot {
     height: 12px;
     width: 12px;
-    background-color: rgba(255, 255, 255, 0.5); /* Warna kelabu lutsinar */
+    background-color: rgba(255,255,255,0.5);
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-/* Gaya bila titik aktif (warna ungu/biru seperti UTHM) */
 .dot.active {
-    background-color: #6366f1; /* Warna aktif */
-    width: 25px; /* Jadikan sedikit panjang untuk efek moden */
+    background-color: #6366f1; /* ✏️ Warna dot aktif */
+    width: 25px;
     border-radius: 10px;
 }
-.carousel-section {
-    position: relative;
-}
 
 
-/* ==========================================
-   SEKSYEN VIDEO PROMOSI
-   ========================================== */
+/* ============================================================
+   6. PROMO VIDEO (index.html)
+   ============================================================ */
 .promo-video-section {
     padding: 60px 5%;
     text-align: center;
@@ -103,274 +388,150 @@ h3 { text-align: center; margin-bottom: 30px; font-size: 30px; color: black; fon
     margin: 0 auto;
 }
 
-.promo-video-wrapper video {
+.promo-video-wrapper video,
+.promo-video-wrapper iframe {
     width: 100%;
     border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     display: block;
 }
 
-/* ==========================================
-   2. NAVIGATION & HEADER
-   ========================================== */
-/* 1. Pastikan main-nav menggunakan space-between atau flex yang seimbang */
-.main-nav {
-    display: flex;
-	justify-content: space-between; /* Ini akan menolak logo ke kiri dan nav-center ke tengah */
-    align-items: center;
-    padding: 0 50px; /* Jarak kiri kanan */
-    height: 80px;
-    background: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
 
-/* 2. Gunakan flex: 1 pada nav-left dan buat satu div kosong (dummy) jika perlu, 
-      ATAU cara paling senang: */
-
-.nav-left {
-    width: auto; /* Ikut saiz logo sahaja, tak stretch */
-    flex-shrink: 0;
-}
-
-.nav-center {
-    flex: 2; /* Memberi ruang lebih besar supaya ia boleh berada di tengah */
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-/* Tambah ini jika anda mahu nav-center betul-betul 'dead center' 
-   walaupun butang kanan sudah dibuang */
-.nav-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.main-nav.scrolled {
-    background: rgba(255, 255, 255, 0.7); /* 0.7 adalah tahap lutsinar */
-    backdrop-filter: blur(10px); /* INI "RAHSIA" DIA: Blur belakang supaya tulisan tetap jelas */
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.1); /* Tambah border halus supaya nampak elegan */
-}
-
-.nav-logo { height: 80px; width: auto; display: block; }
-
-.nav-center { display: flex; gap: 40px; font-size: 28px; font-weight: 600; font-family: 'Poppins', sans-serif; }
-.nav-center a { color: #004080; transition: color 0.3s ease; padding-bottom: 5px; border-bottom: 2px solid transparent; }
-.nav-center a:hover { color: #e11d48; }
-.nav-center a.active { color: #e11d48; font-weight: bold; border-bottom: 2px solid #e11d48; }
-
-.hero-banner { 
-    text-align: center; 
-    padding: 80px 20px; 
-    color: white;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply; 
-    background-color: rgba(30, 58, 138, 0.85); 
-	h2 { text-align: center; margin-bottom: 30px; font-size: 40px; color: white; }
-
-}
-/* --- Dropdown Menu Styles --- */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none; /* Sorok menu secara default */
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    z-index: 1100;
-    top: 100%; /* Muncul tepat di bawah menu utama */
-}
-
-.dropdown-content a {
-    color: #004080;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 18px; /* Kecilkan sikit dari font menu utama (28px) */
-    border-bottom: none;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-    color: #e11d48;
-}
-
-/* Tunjukkan menu bila hover pada perkataan Levels */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Tambah jarak sikit supaya tak terputus bila nak gerakkan mouse ke bawah */
-.dropdown .dropbtn {
-    cursor: pointer;
-}
-
-/* ==========================================
-   3. UI COMPONENTS (Buttons, Cards, Footer)
-   ========================================== */
-.login-btn { display: inline-block; padding: 8px 16px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; transition: background-color 0.3s ease; }
-.login-btn:hover { background-color: #e11d48; }
-
-.btn-primary { background: #e11d48; color: white; border: none; padding: 15px 30px; cursor: pointer; margin-top: 20px; border-radius: 5px; }
-
-footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
-
-.footer-main {
+/* ============================================================
+   7. FLOOR CARDS & FEATURES (index.html)
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar kad aras & kotak ciri-ciri.
+   ============================================================ */
+.floor-container {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    align-items: start;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 40px 5%;
 }
 
-/* Brand / Logo column */
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
+.floor-card {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 8px;
 }
-.footer-logo-img {
-    width: 130px;
-    height: 130px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: white;
-    padding: 10px;
-    box-shadow: 0 4px 20px rgba(255,255,255,0.15);
-}
-.footer-brand-info p {
-    margin: 2px 0;
-    font-size: 13px;
-    color: #94a3b8;
-    line-height: 1.6;
-}
-.footer-brand-info a { color: #93c5fd; }
-.footer-brand-info strong { color: #e2e8f0; font-size: 14px; }
 
-/* Link columns */
-.footer-col h4 {
-    color: #f87171;
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.floor-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.footer-col ul li {
-    margin-bottom: 10px;
-}
-.footer-col ul li a {
-    color: #94a3b8;
-    font-size: 13px;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.footer-col ul li a::before {
-    content: '◈';
-    color: #3b5bdb;
-    font-size: 10px;
-}
-.footer-col ul li a:hover { color: #f87171; }
 
-/* Social column - Font Awesome icons */
-.footer-social-col ul li a i {
-    width: 18px;
-    text-align: center;
-    font-size: 15px;
-    color: #6366f1;
-    transition: color 0.2s;
-}
-.footer-social-col ul li a:hover i { color: #f87171; }
-
-/* Bottom bar */
-.footer-bottom {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 13px;
-    color: #64748b;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-.footer-bottom-links a {
-    color: #64748b;
-    margin: 0 4px;
-    font-size: 12px;
-    transition: color 0.2s;
-}
-.footer-bottom-links a:hover { color: #f87171; }
-
-/* ==========================================
-   4. PAGES: HOME & FLOOR CARDS
-   ========================================== */
-.floor-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 40px 5%; }
-.floor-card { position: relative; height: 250px; overflow: hidden; border-radius: 8px; }
-.floor-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .floor-card:hover img { transform: scale(1.15); }
-.overlay { position: absolute; bottom: 20px; left: 20px; color: white; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 40px 5%; }
-.feature-box { background: white; padding: 30px; border-radius: 10px; transition: all 0.3s ease; text-align: center; font-size: 20px; color: #0f172a; border: 2px solid transparent; }
-.feature-box:hover { box-shadow: 0 0 25px rgba(225, 29, 72, 0.3); border-color: #e11d48; }
-
-/* Gaya untuk bilik yang dipilih di sidebar */
-.room-item-card.active {
-    background-color: #004080;
+.overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     color: white;
-    border-color: #004080;
+    font-size: 24px;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Gaya untuk gambar kenit (thumbnail) yang dipilih */
-.thumb-card.active {
-    border: 3px solid #e11d48; /* Warna merah highlight */
-    transform: scale(1.05); /* Besarkan sedikit */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-/* ==========================================
-   5. PAGES: 360 TOUR
-   ========================================== */
-.tour-main-wrapper { 
-    display: flex; padding: 40px 5% 50px 5%; gap: 30px; align-items: flex-start; min-height: 700px; 
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px 5%;
 }
 
-.sidebar-list { 
-    flex: 0 0 220px; height: 600px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center;
+.feature-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 20px;
+    color: #0f172a;
+    border: 2px solid transparent;
 }
-.room-item-card { 
-    padding: 15px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 8px; cursor: pointer; background: white; transition: 0.3s;
+
+.feature-box:hover {
+    box-shadow: 0 0 25px rgba(225, 29, 72, 0.3);
+    border-color: #e11d48;
 }
+
+
+/* ============================================================
+   8. 360° TOUR — SIDEBAR & VIEWER (Aras 1–4)
+   ============================================================
+   ✏️  sidebar-list  = panel kiri (senarai bilik)
+       viewer-content = bahagian kanan (video + panorama)
+   ============================================================ */
+.tour-main-wrapper {
+    display: flex;
+    padding: 40px 5% 50px 5%;
+    gap: 30px;
+    align-items: flex-start;
+    min-height: 700px;
+}
+
+.sidebar-list {
+    flex: 0 0 220px;
+    height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.room-item-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
 .room-item-card:hover { border-color: #1e3a8a; }
 .room-item-card.active { background: #1e3a8a; color: white; }
 
 .viewer-content { flex: 3; min-width: 0; width: 0; }
-.viewer-video-box { overflow: hidden; margin-bottom: 20px; border-radius: 8px; width: 100%; }
 
+.viewer-video-box {
+    position: relative;
+    overflow: visible;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    width: 100%;
+}
 
-/* Fail style.css */
+.viewer-video-box iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 300px;
+    display: block;
+}
+
+.video-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.video-grid iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+#panorama-area { position: relative; }
+
 #panorama {
     aspect-ratio: 16 / 9;
     width: 100%;
@@ -379,80 +540,6 @@ footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
 }
 
 .pano-box {
-    height: 500px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-}
-
-#room-title { margin-top: 20px; }
-
-/* Container utama thumbnails */
-.thumbnails-row { 
-    display: flex; 
-    gap: 15px;
-    margin-top: 40px; 
-    padding: 20px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 15px;
-    overflow-x: auto;
-    justify-content: flex-start; /* Bermula dari kiri */
-}
-
-/* Class baru: Jika item sikit, letak di tengah (Aras 4) */
-.thumbnails-row.few-items {
-    justify-content: center;
-}
-
-/* Gaya kad thumbnail */
-.thumb-card { 
-    flex: 0 0 calc(20% - 12px);  /* 5 kad dalam satu masa */
-    min-width: 160px;
-    border: 2px solid #eee; 
-    border-radius: 10px; 
-    overflow: hidden; 
-    cursor: pointer; 
-    transition: all 0.3s ease;
-    background: #fff;
-    scroll-snap-align: start;
-}
-
-/* Gambar dalam kad */
-.thumb-card img { 
-    width: 100%; 
-    height: 200px;           /* Tinggi gambar thumbnail */
-    object-fit: cover; 
-    transition: 0.3s;
-}
-
-/* Teks bawah gambar */
-.thumb-card p { 
-    padding: 10px; 
-    font-size: 14px; 
-    font-weight: 600;
-    margin: 0; 
-    text-align: center; 
-    color: #333;
-}
-
-/* --- KESAN HIGHLIGHT (Bila Aktif) --- */
-.thumb-card.active {
-    border-color: #e11d48;    /* Warna merah highlight */
-    box-shadow: 0 0 15px rgba(225, 29, 72, 0.3);
-    transform: translateY(-5px); /* Kad naik sedikit */
-}
-
-.thumb-card.active p {
-    color: #e11d48;
-}
-
-/* Kesan bila mouse lalu (Hover) */
-.thumb-card:hover:not(.active) {
-    border-color: #004080;
-    transform: translateY(-3px);
-}
-/* Pastikan kotak panorama ada tinggi dan margin */
-.pano-box {
     height: 450px;
     margin-bottom: 25px;
     border-radius: 12px;
@@ -460,124 +547,394 @@ footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     background: #eee;
 }
-.video-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-}
 
-/* Pastikan video tidak terlalu tinggi supaya tak penuh skrin */
-.video-grid iframe {
-    aspect-ratio: 16 / 9;
+#room-title { margin-top: 20px; }
+
+.iframe-container {
     width: 100%;
-    height: 420;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
-/* Fail style.css */
-.viewer-video-box iframe {
+
+/* ============================================================
+   9. 360° TOUR — THUMBNAILS
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar saiz gambar kecil bawah viewer.
+   ============================================================ */
+.thumbnails-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    overflow-x: auto;
+    justify-content: flex-start;
+}
+
+.thumbnails-row.few-items { justify-content: center; }
+
+.thumb-card {
+    flex: 0 0 calc(20% - 12px);
+    min-width: 160px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.thumb-card img {
     width: 100%;
-    height: 600px; /* Tingkatkan daripada 400px kepada 600px */
+    height: auto;
+    object-fit: unset;
+    transition: 0.3s;
 }
 
-.video-grid iframe {
-    aspect-ratio: 16 / 9;
+.thumb-card p {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    color: #333;
+}
+
+.thumb-card.active {
+    border-color: #e11d48;
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.3);
+    transform: translateY(-5px);
+}
+
+.thumb-card.active p { color: #e11d48; }
+
+.thumb-card:hover:not(.active) {
+    border-color: #004080;
+    transform: translateY(-3px);
+}
+
+.thumb-img-wrap {
+    position: relative;
     width: 100%;
-    height: 500px; /* Saiz video untuk paparan grid (Multi) */
+    height: 120px;
+    overflow: hidden;
 }
 
-/* (thumbnails-row dah defined atas) */
-@media (max-width: 768px) {
-    .video-grid {
-        grid-template-columns: 1fr; /* jadi 1 column */
-    }
+.thumb-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-/* ===== Room Info Card (Hikmah & Eksplorasi) ===== */
-.ric-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.8rem 2rem;max-width:100%;margin:12px auto}
-.ric-badge{display:inline-block;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:#dbeafe;color:#1e40af;margin-bottom:14px;letter-spacing:.04em}
-.ric-title{font-size:26px;font-weight:700;color:#0f172a;margin:0 0 4px}
-.ric-cap-row{display:flex;align-items:center;gap:10px;margin:12px 0 20px}
-.ric-cap-icon{width:38px;height:38px;border-radius:50%;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:18px}
-.ric-cap-num{font-size:26px;font-weight:700;color:#004080}
-.ric-cap-label{font-size:13px;color:#64748b;margin-top:2px}
-.ric-divider{border:none;border-top:1px solid #e2e8f0;margin:0 0 18px}
-.ric-section-label{font-size:11px;color:#94a3b8;letter-spacing:.08em;font-weight:700;margin:0 0 10px;text-transform:uppercase}
-.ric-filter-hint{font-size:12px;color:#94a3b8;margin:0 0 10px;font-style:italic}
-.ric-facility-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.ric-fac{display:flex;align-items:center;gap:7px;padding:8px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#334155;cursor:pointer;transition:all .15s;user-select:none}
-.ric-fac:hover{border-color:#004080}
-.ric-fac.active{background:#004080;border-color:#004080;color:#fff}
-.ric-fac.active .ric-dot{background:#fff !important}
-.ric-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ric-dot-blue{background:#3b82f6}
-.ric-dot-green{background:#22c55e}
-.ric-rooms-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:10px}
-.ric-rn{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;text-align:center;padding:7px 2px;font-size:13px;font-weight:500;color:#475569;transition:all .2s;position:relative}
-.ric-rn-comp{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
-.ric-rn-both{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
-.ric-rn.unavailable{background:#f8fafc !important;color:#cbd5e1 !important;border-color:#f1f5f9 !important;opacity:.4}
-.ric-rn.unavailable[title]{cursor:help}
-.ric-rn.unavailable[title]:hover::after{content:attr(title);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1e3a8a;color:white;font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:99;pointer-events:none}
-.ric-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
-.ric-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b}
-.ric-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 
 
-/* ===== Room Info Card YANG LAIN ===== */
-.ric-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.8rem 2rem;max-width:100%;margin:12px auto}
-.ric-badge{display:inline-block;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:#dbeafe;color:#1e40af;margin-bottom:14px;letter-spacing:.04em}
-.ric-title{font-size:26px;font-weight:700;color:#0f172a;margin:0 0 4px}
-.ric-cap-row{display:flex;align-items:center;gap:10px;margin:12px 0 20px}
-.ric-cap-icon{width:38px;height:38px;border-radius:50%;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:18px}
-.ric-cap-num{font-size:26px;font-weight:700;color:#004080}
-.ric-cap-label{font-size:13px;color:#64748b;margin-top:2px}
-.ric-divider{border:none;border-top:1px solid #e2e8f0;margin:0 0 18px}
-.ric-section-label{font-size:11px;color:#94a3b8;letter-spacing:.08em;font-weight:700;margin:0 0 10px;text-transform:uppercase}
-.ric-filter-hint{font-size:12px;color:#94a3b8;margin:0 0 10px;font-style:italic}
-.ric-desc{font-size:14px;color:#475569;line-height:1.75;margin:0 0 20px}
-.ric-facility-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.ric-fac{display:flex;align-items:center;gap:7px;padding:8px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#334155;cursor:pointer;transition:all .15s;user-select:none}
-.ric-fac:hover{border-color:#004080}
-.ric-fac.active{background:#004080;border-color:#004080;color:#fff}
-.ric-fac.active .ric-dot{background:#fff !important}
-.ric-fac.no-filter{cursor:default;pointer-events:none}
-.ric-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ric-dot-blue{background:#3b82f6}
-.ric-dot-green{background:#22c55e}
-.ric-dot-red{background:#ef4444}
-.ric-dot-yellow{background:#f59e0b}
-.ric-dot-purple{background:#8b5cf6}
-.ric-rooms-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:10px}
-.ric-rn{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;text-align:center;padding:7px 2px;font-size:13px;font-weight:500;color:#475569;transition:all .2s}
-.ric-rn-comp{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
-.ric-rn-both{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
-.ric-rn.unavailable{background:#f8fafc !important;color:#cbd5e1 !important;border-color:#f1f5f9 !important;opacity:.4}
-.ric-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
-.ric-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b}
-.ric-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.ric-note{font-size:13px;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-top:4px;display:flex;align-items:flex-start;gap:8px}
+/* ============================================================
+   10. 360° TOUR — WATERMARK
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar saiz atau opacity watermark.
+   ============================================================ */
+.watermark {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9999;
+    opacity: 0.75;             /* ✏️ 0 = invisible, 1 = penuh */
+    pointer-events: none;
+}
 
-/* ==========================================
-   6. PAGES: MAPS
-   ========================================== */
+.watermark img {
+    width: 70px;               /* ✏️ Saiz watermark utama */
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8));
+}
+
+.thumb-img-wrap .watermark { position: absolute; bottom: 6px; right: 6px; }
+.thumb-img-wrap .watermark img { width: 28px; }
+.thumb-card .watermark img { width: 30px; }
+
+
+/* ============================================================
+   11. ROOM INFO CARD (ric-*)
+   ============================================================
+   ✏️  Kad maklumat bilik (muncul selepas pilih bilik).
+
+   BAHAGIAN YANG SELALU DIUBAH:
+     • .ric-title  — Nama bilik (tajuk besar)
+     • .ric-desc   — Penerangan bilik ← UBAH FONT SIZE DI SINI
+     • .ric-badge  — Label "LEVEL X"
+     • .ric-fac    — Badge kemudahan
+     • .ric-note   — Nota amaran
+   ============================================================ */
+.ric-wrap {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    max-width: 100%;
+    margin: 12px auto;
+}
+
+.ric-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #dbeafe;
+    color: #1e40af;
+    margin-bottom: 14px;
+    letter-spacing: .04em;
+}
+
+.ric-title {
+    font-size: 26px;           /* ✏️ Saiz nama bilik */
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px;
+}
+
+.ric-cap-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 20px;
+}
+
+.ric-cap-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.ric-cap-num { font-size: 26px; font-weight: 700; color: #004080; }
+.ric-cap-label { font-size: 13px; color: #64748b; margin-top: 2px; }
+
+.ric-divider { border: none; border-top: 1px solid #e2e8f0; margin: 0 0 18px; }
+
+.ric-section-label {
+    font-size: 11px;
+    color: #94a3b8;
+    letter-spacing: .08em;
+    font-weight: 700;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+}
+
+.ric-filter-hint { font-size: 12px; color: #94a3b8; margin: 0 0 10px; font-style: italic; }
+
+/* ── PENERANGAN BILIK ──────────────────────────────────────
+   ✏️  TUKAR font-size DI SINI untuk besarkan/kecilkan teks
+       penerangan bilik. Nilai semasa: 17px
+   ────────────────────────────────────────────────────────── */
+.ric-desc {
+    font-size: 17px;           /* ✏️ Saiz teks penerangan bilik */
+    color: #475569;            /* ✏️ Warna teks */
+    line-height: 1.85;         /* ✏️ Jarak antara baris */
+    margin: 0 0 20px;
+}
+
+.ric-facility-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+.ric-fac {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #334155;
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+}
+
+.ric-fac:hover { border-color: #004080; }
+.ric-fac.active { background: #004080; border-color: #004080; color: #fff; }
+.ric-fac.active .ric-dot { background: #fff !important; }
+.ric-fac.no-filter { cursor: default; pointer-events: none; }
+
+.ric-dot         { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ric-dot-blue    { background: #3b82f6; }
+.ric-dot-green   { background: #22c55e; }
+.ric-dot-red     { background: #ef4444; }
+.ric-dot-yellow  { background: #f59e0b; }
+.ric-dot-purple  { background: #8b5cf6; }
+
+.ric-rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.ric-rn {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    text-align: center;
+    padding: 7px 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    transition: all .2s;
+    position: relative;
+}
+
+.ric-rn-comp { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.ric-rn-both { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+
+.ric-rn.unavailable {
+    background: #f8fafc !important;
+    color: #cbd5e1 !important;
+    border-color: #f1f5f9 !important;
+    opacity: .4;
+}
+
+.ric-rn.unavailable[title] { cursor: help; }
+.ric-rn.unavailable[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e3a8a;
+    color: white;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 99;
+    pointer-events: none;
+}
+
+.ric-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
+.ric-leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; }
+.ric-leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+.ric-note {
+    font-size: 13px;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+
+/* ============================================================
+   12. MAPS PAGE
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar reka bentuk halaman Peta.
+   ============================================================ */
 .maps-container { padding: 40px 5%; }
-.map-box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-.floor-bar { 
-    background: #1e3a8a; color: white; padding: 10px 15px; margin-top: 20px; font-weight: bold; border-radius: 4px;
+.map-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
-.room-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px 0; text-align: center; }
-.room-card { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 6px; }
-.room-card h4 { margin: 0; color: #1e3a8a; }
 
-.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
-.info-box { 
-    background: white; padding: 30px 28px; border: 1px solid #e2e8f0; border-radius: 16px; 
+.directory-section { margin-top: 10px; }
+
+.floor-bar {
+    background: #1e3a8a;       /* ✏️ Warna bar tajuk aras */
+    color: white;
+    padding: 10px 15px;
+    margin-top: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.floor-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.floor-image {
+    flex: 1;
+    min-width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.floor-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.room-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-content: start;
+}
+
+.room-card {
+    background: #f8fafc;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.room-card h4 { margin: 0 0 6px; color: #1e3a8a; }
+.room-card p  { margin: 0; font-size: 13px; color: #64748b; }
+
+.room-card:hover {
+    background: #e11d48;
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.room-card:hover h4,
+.room-card:hover p { color: white; }
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+}
+
+.info-box {
+    background: white;
+    padding: 30px 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
 }
+
 .info-box:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
 
-/* Icon bulat dengan warna latar */
 .info-icon-wrap {
     width: 60px;
     height: 60px;
@@ -589,31 +946,40 @@ footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
     margin: 0 auto 16px;
     box-shadow: 0 4px 14px rgba(30,58,138,0.25);
 }
-.info-fa-icon {
-    font-size: 24px;
-    color: white;
-}
 
-.info-box h3 { 
-    font-size: 18px; font-weight: 700; color: #1e3a8a; 
-    margin: 0 0 16px; padding-bottom: 10px; 
+.info-fa-icon { font-size: 24px; color: white; }
+
+.info-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
     border-bottom: 2px solid #e11d48;
     text-align: center;
     display: inline-block;
     width: 100%;
 }
+
 .info-table { display: flex; flex-direction: column; gap: 6px; }
-.info-row { 
-    display: flex; justify-content: space-between; gap: 12px;
-    font-size: 13px; color: #475569; line-height: 1.5;
-    padding: 8px 10px; background: #f8fafc; border-radius: 8px;
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+    padding: 8px 10px;
+    background: #f8fafc;
+    border-radius: 8px;
 }
+
 .info-row span:first-child { font-weight: 600; color: #1e3a8a; white-space: nowrap; }
 .info-row span:last-child { text-align: right; color: #475569; }
 .info-row span:last-child a { color: #e11d48; }
 .info-row.holiday span { color: #94a3b8 !important; }
 
-/* Operating Hours - 4 column grid */
 .info-row.hours-header,
 .info-row.hours-row {
     display: grid;
@@ -621,106 +987,34 @@ footer { background: #0a0a3c; color: #cbd5e1; padding: 50px 5% 0; }
     gap: 8px;
     text-align: center;
 }
+
 .info-row.hours-header span,
-.info-row.hours-row span {
-    text-align: center;
-    font-weight: normal;
-    color: #475569;
-    white-space: normal;
-}
-.info-row.hours-header { background: #e8eef7; font-weight: 700; }
+.info-row.hours-row span { text-align: center; font-weight: normal; color: #475569; white-space: normal; }
+
+.info-row.hours-header { background: #e8eef7; }
 .info-row.hours-header span { font-weight: 700; color: #1e3a8a; }
 .info-row.hours-row span:first-child { font-weight: 600; color: #1e3a8a; text-align: left; }
 .info-row.holiday { display: grid; grid-template-columns: 1.8fr 3fr; gap: 8px; }
 .info-row.holiday span:first-child { text-align: left; }
 .closed-tag { color: #94a3b8 !important; font-style: italic; }
 
-/* Kesan Highlight untuk Room Card di Maps */
-.room-card {
-    background: #f8fafc;
-    padding: 15px;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    cursor: pointer; /* Tukar pointer mouse */
-    transition: all 0.3s ease;
-}
 
-.room-card:hover {
-    background: #e11d48; /* Warna merah UTHM bila hover */
-    color: white;
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+/* ============================================================
+   13. TEAM PAGE
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar reka bentuk halaman Team.
+   ============================================================ */
+h1.section-title { color: #1e3a8a; }
 
-.room-card:hover h4 {
-    color: white; /* Tukar tajuk jadi putih bila hover */
-}
-
-/* Container Utama untuk setiap aras */
-.floor-row {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 50px;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-/* Bahagian Gambar (Kiri) */
-.floor-image {
-    flex: 1; /* Ambil lebih kurang 30-40% ruang */
-    min-width: 300px;
-    height: 350px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.floor-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Pastikan gambar penuh kotak tanpa penyek */
-}
-
-/* Bahagian Grid Bilik (Kanan) */
-.room-grid {
-    flex: 2; /* Ambil baki ruang yang ada */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Susun 2 bilik sebaris seperti lakar anda */
-    gap: 20px;
-    align-content: start;
-}
-
-/* Penyesuaian untuk skrin kecil (Mobile) */
-@media (max-width: 900px) {
-    .floor-row {
-        flex-direction: column; /* Gambar akan berada di atas bilik */
-    }
-    .room-grid {
-        grid-template-columns: 1fr; /* 1 bilik sebaris */
-    }
-}
-
-
-/* ==========================================
-   7. PAGES: TEAM
-   ========================================== */
-   
-   /* H1 untuk section content (bukan hero banner) */
-h1.section-title {
-    color: #1e3a8a;
-}
-   
-.team-container { 
+.team-container {
     padding: 60px 5%;
     max-width: 100%;
-    margin: 0 auto; 
-    box-sizing: border-box; 
+    margin: 0 auto;
+    box-sizing: border-box;
     text-align: center;
 }
+
 .section-box { margin-bottom: 80px; width: 100%; }
-
-
 
 .section-box h1::after {
     content: '';
@@ -732,7 +1026,7 @@ h1.section-title {
     border-radius: 2px;
 }
 
-/* ── PENASIHAT ── */
+/* ── Penasihat ── */
 .supervisor-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -740,6 +1034,7 @@ h1.section-title {
     max-width: 100%;
     margin: 0 auto;
 }
+
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -751,12 +1046,9 @@ h1.section-title {
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.profile-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.13);
-}
 
-/* Gambar penasihat bulat — 300px, jelas tanpa zoom */
+.profile-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.13); }
+
 .profile-img-wrap {
     width: 300px;
     height: 300px;
@@ -768,26 +1060,34 @@ h1.section-title {
     margin-bottom: 22px;
     flex-shrink: 0;
 }
-.profile-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top; /* fokus muka */
-}
+
+.profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
 .profile-info h2 { font-size: 22px; margin: 0 0 6px; color: #1e3a8a; }
-.profile-info h3 { 
+.profile-info h3 {
     font-size: 14px; margin: 0 0 12px; color: #e11d48; font-weight: 600;
     display: inline-block; background: #fff0f3; padding: 4px 14px; border-radius: 20px;
 }
 .profile-bio { font-size: 14px; color: #64748b; margin: 0; line-height: 1.7; }
 
-/* ── GAMBAR TEAM BESAR — centered, no blue gap ── */
+/* ── Video/gambar team besar ── */
 .team-photo-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    width: 100%;
 }
+
+.team-photo-wrap iframe {
+    width: 100%;
+    max-width: 1300px;
+    height: 600px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    display: block;
+}
+
 .team-photo-wrap img {
     max-width: 70%;
     height: 800px;
@@ -796,9 +1096,9 @@ h1.section-title {
     display: block;
 }
 
-/* ── MEMBER CARDS ── */
+/* ── Ahli Team ── */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
 .member-card {
     background: white;
@@ -807,14 +1107,10 @@ h1.section-title {
     box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
-    border: none;
-}
-.member-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.13);
 }
 
-/* Gambar member bulat — 150px, jelas */
+.member-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.13); }
+
 .member-img-wrap {
     width: 150px;
     height: 150px;
@@ -825,45 +1121,60 @@ h1.section-title {
     box-shadow: 0 4px 14px rgba(30,58,138,0.13);
     background: #e8edf5;
 }
-.member-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-}
+
+.member-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
 .member-card h2 { font-size: 20px; margin: 0 0 6px; color: #1e3a8a; font-weight: 700; }
 .member-matrix { font-size: 13px; color: #94a3b8; margin: 0 0 8px; }
+
 .member-role {
-    display: inline-block; background: #eff6ff; color: #1e3a8a;
-    font-size: 13px; font-weight: 600; padding: 5px 16px;
-    border-radius: 20px; margin: 0 0 12px;
-}
-.member-quote {
-    font-size: 13px; color: #94a3b8; font-style: italic; margin: 0; line-height: 1.6;
-    border-top: 1px solid #f1f5f9; padding-top: 12px; margin-top: 4px;
+    display: inline-block;
+    background: #eff6ff;
+    color: #1e3a8a;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin: 0 0 12px;
 }
 
-/* ── PENGHARGAAN ── */
-.ack-subtitle {
-    color: #64748b; font-size: 16px; margin: -20px 0 36px; text-align: center;
+.member-quote {
+    font-size: 13px;
+    color: #94a3b8;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.6;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+    margin-top: 4px;
 }
+
+/* ── Penghargaan ── */
+.ack-subtitle { color: #64748b; font-size: 16px; margin: -20px 0 36px; text-align: center; }
+
 .ack-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 30px; max-width: 100%; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
 }
+
 .ack-card {
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    background: white; border-radius: 20px; padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.07);
     border-top: 5px solid #e11d48;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.ack-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.12);
-}
 
-/* Gambar acknowledgment bulat — 150px */
+.ack-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(0,0,0,0.12); }
+
 .ack-img-wrap {
     width: 150px;
     height: 150px;
@@ -874,18 +1185,22 @@ h1.section-title {
     box-shadow: 0 4px 14px rgba(225,29,72,0.15);
     background: #fce7eb;
 }
-.ack-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-}
+
+.ack-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
 .ack-badge {
-    display: inline-block; background: #fff0f3; color: #e11d48;
-    font-size: 12px; font-weight: 700; padding: 4px 14px;
-    border-radius: 20px; margin-bottom: 12px;
-    letter-spacing: 0.5px; text-transform: uppercase;
+    display: inline-block;
+    background: #fff0f3;
+    color: #e11d48;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
+
 .ack-info { width: 100%; }
 .ack-info h2 { font-size: 22px; margin: 0 0 6px; color: #1e3a8a; }
 .ack-info h3 { font-size: 14px; margin: 0 0 12px; color: #64748b; font-weight: 400; }
@@ -897,362 +1212,187 @@ h1.section-title {
     margin: 0 auto;
 }
 
-/* ── FOOTAGE ── */
-.footage-gallery { 
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 220px; gap: 16px; margin-top: 20px;
+/* ── Footage ── */
+.footage-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 16px;
+    margin-top: 20px;
 }
-.box { 
-    background: #e2e8f0; border-radius: 12px; overflow: hidden;
-    border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center;
+
+.box {
+    background: #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .box img, .box video { width: 100%; height: 100%; object-fit: cover; }
 .box.big { grid-column: span 2; grid-row: span 2; }
 
-/* Buang override lama yang tak perlu */
-.img-box { width: 100%; height: 200px; background: #ddd; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-.img-box img { width: 100%; height: 100%; object-fit: cover; }
 
+/* ============================================================
+   14. FOOTER
+   ============================================================
+   ✏️  EDIT DI SINI untuk tukar warna, saiz atau layout footer.
+   ============================================================ */
+footer {
+    background: #0a0a3c;       /* ✏️ Warna latar footer */
+    color: #cbd5e1;
+    padding: 50px 5% 0;
+}
 
-/* ==========================================
-   📱 MOBILE RESPONSIVE — FULL OVERHAUL
-   Breakpoints: 768px (tablet), 480px (phone)
-   ========================================== */
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    align-items: start;
+}
 
-/* --- Hamburger Button (hidden on desktop) --- */
-.nav-hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 1200;
-    background: none;
-    border: none;
-    margin-right: 10px;
-}
-.nav-hamburger span {
-    display: block;
-    width: 26px;
-    height: 3px;
-    background: #004080;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-.nav-hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-/* --- Mobile Nav Overlay Menu --- */
-.mobile-nav-menu {
-    display: none;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: white;
-    z-index: 1100;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    flex-direction: column;
-    padding: 10px 0 20px;
-    border-top: 2px solid #e11d48;
-}
-.mobile-nav-menu.open { display: flex; }
-.mobile-nav-menu a {
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #004080;
-    border-bottom: 1px solid #f1f5f9;
-    display: block;
-}
-.mobile-nav-menu a:hover, .mobile-nav-menu a.active { color: #e11d48; background: #fff5f7; }
-.mobile-nav-menu .mobile-submenu-title {
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #004080;
-    border-bottom: 1px solid #f1f5f9;
-    cursor: pointer;
+.footer-brand {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-}
-.mobile-nav-menu .mobile-submenu { display: none; background: #f8fafc; }
-.mobile-nav-menu .mobile-submenu.open { display: block; }
-.mobile-nav-menu .mobile-submenu a {
-    padding: 12px 44px;
-    font-size: 16px;
-    color: #334155;
-    border-bottom: 1px solid #e2e8f0;
-}
-.mobile-nav-menu .mobile-submenu a:hover { color: #e11d48; }
-
-/* ==========================================
-   TABLET (max-width: 1024px)
-   ========================================== */
-@media (max-width: 1024px) {
-    .nav-center { gap: 20px; font-size: 20px; }
-    .floor-container { grid-template-columns: repeat(2, 1fr); }
-    .features { grid-template-columns: repeat(2, 1fr); }
-    .footage-gallery { grid-template-columns: repeat(2, 1fr); }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .supervisor-grid { grid-template-columns: 1fr; }
-    .ack-grid { grid-template-columns: 1fr; }
-    .ack-grid .ack-card:last-child:nth-child(odd) { max-width: 100%; }
-    .info-grid { grid-template-columns: 1fr 1fr; }
-    .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; }
+    text-align: center;
+    gap: 16px;
 }
 
-/* ==========================================
-   MOBILE (max-width: 768px)
-   ========================================== */
+.footer-logo-img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+}
+
+.footer-brand-info p { margin: 2px 0; font-size: 13px; color: #94a3b8; line-height: 1.6; }
+.footer-brand-info a { color: #93c5fd; }
+.footer-brand-info strong { color: #e2e8f0; font-size: 14px; }
+
+.footer-col h4 {
+    color: #f87171;            /* ✏️ Warna tajuk kolum footer */
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+
+.footer-col ul li a {
+    color: #94a3b8;
+    font-size: 13px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-col ul li a::before { content: '◈'; color: #3b5bdb; font-size: 10px; }
+.footer-col ul li a:hover { color: #f87171; }
+
+.footer-social-col ul li a i {
+    width: 18px;
+    text-align: center;
+    font-size: 15px;
+    color: #6366f1;
+    transition: color 0.2s;
+}
+
+.footer-social-col ul li a:hover i { color: #f87171; }
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer-bottom-links a {
+    color: #64748b;
+    margin: 0 4px;
+    font-size: 12px;
+    transition: color 0.2s;
+}
+
+.footer-bottom-links a:hover { color: #f87171; }
+
+
+/* ============================================================
+   15. RESPONSIVE / MEDIA QUERIES
+   ============================================================
+   ✏️  Breakpoint utama: 768px (tablet/mobile)
+                         480px (telefon kecil)
+   ============================================================ */
 @media (max-width: 768px) {
 
-    /* Body */
-    body { padding-top: 70px; }
-
-    /* --- NAVIGATION --- */
-    .main-nav { 
-        padding: 0 16px; 
-        height: 70px;
-        box-sizing: border-box;
-    }
-    .nav-center { display: none; } /* Sorok nav desktop */
-    .nav-logo { height: 55px; }
+    /* Hamburger aktif, nav-center sembunyi */
     .nav-hamburger { display: flex; }
+    .nav-center { display: none; }
+    .mobile-nav-menu { display: flex; }
 
-    /* --- HERO BANNER --- */
+    /* Hero banner */
     .hero-banner { padding: 50px 16px; }
-    .hero-banner h1, h1 { font-size: 28px; line-height: 1.3; }
-    .hero-banner h2, h2 { font-size: 18px; }
+    .hero-banner h1 { font-size: 32px; }
+    .hero-banner h2 { font-size: 18px; }
 
-    /* --- CAROUSEL --- */
-    .carousel-container { height: 220px; }
+    /* Carousel */
+    .carousel-container { height: 250px; }
 
-    /* --- HOME: FLOOR CARDS --- */
-    .floor-container { 
-        grid-template-columns: repeat(2, 1fr); 
-        padding: 20px 4%;
-        gap: 12px;
-    }
-    .floor-card { height: 150px; }
-    .overlay { font-size: 18px; bottom: 12px; left: 12px; }
+    /* Floor cards — 2 kolum */
+    .floor-container { grid-template-columns: repeat(2, 1fr); }
 
-    /* --- HOME: FEATURES --- */
-    .features { 
-        grid-template-columns: 1fr; 
-        padding: 20px 4%;
-        gap: 14px;
-    }
-    .feature-box { font-size: 16px; padding: 22px; }
+    /* Features — 1 kolum */
+    .features { grid-template-columns: 1fr; }
 
-    /* --- 360 TOUR PAGE --- */
-    .tour-main-wrapper { 
-        flex-direction: column; 
-        padding: 16px 4% 30px;
-        gap: 16px;
-    }
-    .sidebar-list { 
-        flex: none;
-        width: 100%;
-        height: auto;
-        max-height: 180px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        border-radius: 10px;
-    }
-    .sidebar-list h3 { display: none; } /* Sorok header sidebar */
-    .room-item-card { 
-        flex: 0 0 auto;
-        white-space: nowrap;
-        padding: 10px 18px;
-        margin-bottom: 0;
-        font-size: 14px;
-    }
+    /* Tour — atas-bawah */
+    .tour-main-wrapper { flex-direction: column; padding: 20px 4%; }
+    .sidebar-list { flex: none; width: 100%; height: auto; max-height: 200px; }
     .viewer-content { width: 100%; }
-    .viewer-video-box iframe { height: 220px !important; }
-    #panorama { height: 280px !important; }
-    .video-grid iframe { height: 220px !important; }
 
-    /* Thumbnail row */
-    .thumbnails-row { 
-        padding: 12px;
-        gap: 10px;
-        margin-top: 20px;
-        justify-content: flex-start !important;
-    }
-    .thumb-card { 
-        flex: 0 0 130px;
-        min-width: 130px;
-    }
-    .thumb-card img { height: 130px; }
-    .thumb-card p { font-size: 12px; padding: 6px; }
+    /* Video grid */
+    .video-grid { grid-template-columns: 1fr; }
 
-    /* Room title & desc */
-    #room-title { font-size: 22px; margin-top: 16px; }
-    #room-desc { font-size: 14px; }
-    .ric-title { font-size: 20px; }
-    .ric-cap-num { font-size: 20px; }
-
-    /* --- MAPS PAGE --- */
-    .maps-container { padding: 20px 4%; }
-    .room-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .info-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
-    .floor-row { flex-direction: column; gap: 16px; padding: 14px; }
-    .floor-image { min-width: unset; height: 200px; }
-
-    /* --- TEAM PAGE --- */
-    .team-container { padding: 30px 4%; }
-    .supervisor-grid { grid-template-columns: 1fr; gap: 20px; }
-    .profile-img-wrap { width: 180px; height: 180px; }
-    .profile-info h2 { font-size: 18px; }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .member-img-wrap { width: 100px; height: 100px; }
-    .member-card h2 { font-size: 15px; }
-    .ack-grid { grid-template-columns: 1fr; }
-    .ack-grid .ack-card:last-child:nth-child(odd) { max-width: 100%; }
-    .team-photo-wrap iframe { 
-        width: 100% !important; 
-        height: 220px !important; 
-    }
-    .footage-gallery { 
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 150px;
-        gap: 10px;
-    }
-    .box.big { grid-column: span 1; grid-row: span 1; }
-
-    /* --- FOOTER --- */
-    .footer-main { 
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-    .footer-bottom { 
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-    }
-    .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
-}
-
-/* ==========================================
-   SMALL PHONE (max-width: 480px)
-   ========================================== */
-@media (max-width: 480px) {
-    h1 { font-size: 22px; }
-    h2 { font-size: 16px; }
-    h3 { font-size: 16px; }
-
-    .hero-banner { padding: 36px 12px; }
-    .carousel-container { height: 180px; }
-
-    /* Floor cards: 1 column on very small */
-    .floor-container { grid-template-columns: 1fr; }
-    .floor-card { height: 160px; }
-
-    /* Tour */
-    .sidebar-list { max-height: 120px; }
-    .viewer-video-box iframe { height: 190px !important; }
-    #panorama { height: 220px !important; }
-    .video-grid iframe { height: 190px !important; }
+    /* Thumbnails */
+    .thumbnails-row { flex-wrap: nowrap; }
+    .thumb-card { min-width: 130px; }
 
     /* Maps */
+    .floor-row { flex-direction: column; }
+    .floor-image { min-width: unset; height: 200px; }
     .room-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
 
     /* Team */
+    .supervisor-grid { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .ack-grid { grid-template-columns: 1fr; }
+    .ack-grid .ack-card:last-child:nth-child(odd) { max-width: 100%; }
+    .team-photo-wrap iframe { height: 250px; }
+
+    /* Footage */
+    .footage-gallery { grid-template-columns: repeat(2, 1fr); }
+    .box.big { grid-column: span 2; grid-row: span 1; }
+
+    /* Footer */
+    .footer-main { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .floor-container { grid-template-columns: 1fr; }
     .grid-4 { grid-template-columns: 1fr; }
-    .footage-gallery { 
-        grid-template-columns: 1fr;
-        grid-auto-rows: 200px;
-    }
-    .box.big { grid-column: span 1; grid-row: span 1; }
-
-    /* Info card */
-    .ric-wrap { padding: 1.2rem 1rem; }
-    .ric-facility-grid { gap: 6px; }
-    .ric-fac { font-size: 12px; padding: 6px 10px; }
-    .info-row.hours-header, .info-row.hours-row {
-        grid-template-columns: 1.5fr 1fr 1fr;
-        font-size: 11px;
-    }
-    .info-row.hours-header span:nth-child(4),
-    .info-row.hours-row span:nth-child(4) { display: none; }
-}
-
-/* ==========================================
-   WATERMARK OVERLAY - FIXED
-   ========================================== */
-
-.viewer-video-box {
-    position: relative;
-    overflow: visible;  /* Biar watermark boleh overlay atas video */
-}
-
-#panorama-area {
-    position: relative;
-}
-
-/* Wrapper untuk setiap panorama individual */
-#panorama-area > div[id^="pano"],
-#panorama-area > div#panorama {
-    position: relative;
-}
-
-.thumb-card {
-    position: relative;
-    overflow: hidden;  /* TUKAR BALIK ke hidden */
-}
-
-.watermark {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 9999;
-    opacity: 0.75;
-    pointer-events: none;
-}
-
-.watermark img {
-    width: 70px;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8));
-}
-
-.thumb-card .watermark img {
-    width: 30px;
-}
-.thumb-img-wrap {
-    position: relative;
-    width: 100%;
-    height: 120px;      /* Sama dengan tinggi gambar thumb */
-    overflow: hidden;
-}
-
-.thumb-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Watermark dalam thumb — ikut thumb-img-wrap, bukan thumb-card */
-.thumb-img-wrap .watermark {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    z-index: 9999;
-    opacity: 0.75;
-    pointer-events: none;
-}
-
-.thumb-img-wrap .watermark img {
-    width: 28px;
-    height: auto;
+    .hero-banner h1 { font-size: 24px; }
 }

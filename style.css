@@ -491,7 +491,6 @@ h3 {
     cursor: pointer;
     background: white;
     transition: 0.3s;
-    font-size: 14px;
 }
 
 .room-item-card:hover { border-color: #1e3a8a; }

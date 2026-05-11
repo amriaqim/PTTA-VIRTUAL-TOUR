@@ -598,7 +598,7 @@ h3 {
 
 .thumb-card p {
     padding: 10px;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     margin: 0;
     text-align: center;
@@ -1046,6 +1046,7 @@ h1.section-title { color: #1e3a8a; }
     padding: 40px 30px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: transform 0.3s, box-shadow 0.3s;
+	border-top: 5px solid #e11d48;
 }
 
 .profile-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.13); }
@@ -1108,6 +1109,7 @@ h1.section-title { color: #1e3a8a; }
     box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
+	border-top: 5px solid #e11d48;
 }
 
 .member-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.13); }
@@ -1151,7 +1153,7 @@ h1.section-title { color: #1e3a8a; }
 }
 
 /* ── Penghargaan ── */
-.ack-subtitle { color: #64748b; font-size: 16px; margin: -20px 0 36px; text-align: center; }
+.ack-subtitle { color: #64748b; font-size: 20px; margin: -20px 0 36px; text-align: center; }
 
 .ack-grid {
     display: grid;
@@ -1234,6 +1236,88 @@ h1.section-title { color: #1e3a8a; }
 
 .box img, .box video { width: 100%; height: 100%; object-fit: cover; }
 .box.big { grid-column: span 2; grid-row: span 2; }
+
+/* ── Collaboration Banner ── */
+.collab-banner {
+    margin-top: 60px;
+    background: linear-gradient(135deg, #0a0a3c 0%, #1a2f7a 50%, #c0122e 100%);
+    border-radius: 24px;
+    padding: 60px 70px;
+    box-shadow: 0 20px 60px rgba(10, 10, 60, 0.35);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+ 
+/* decorative circles background */
+.collab-banner::before,
+.collab-banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: white;
+}
+.collab-banner::before {
+    width: 400px; height: 400px;
+    top: -120px; left: -100px;
+}
+.collab-banner::after {
+    width: 300px; height: 300px;
+    bottom: -80px; right: -60px;
+}
+ 
+.collab-label {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin: 0 0 20px;
+}
+ 
+.collab-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 12px;
+    text-align: center;
+    line-height: 1.2;
+}
+ 
+.collab-x {
+    color: #f87171;
+    font-size: 42px;
+    margin: 0 14px;
+    vertical-align: middle;
+}
+ 
+.collab-divider {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #e11d48, #f87171);
+    border-radius: 4px;
+    margin: 20px auto 24px;
+}
+ 
+.collab-desc {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.9;
+    margin: 0 auto;
+    max-width: 750px;
+    text-align: center;
+}
+ 
+.collab-desc strong { color: #ffffff; font-weight: 700; }
+ 
+.collab-icon {
+    font-size: 56px;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
 
 
 /* ============================================================

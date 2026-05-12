@@ -97,7 +97,7 @@ h3 {
 }
 
 .nav-logo {
-    height: 80px;
+    height: 70px;
     width: auto;
     display: block;
 }
@@ -1237,6 +1237,7 @@ h1.section-title { color: #1e3a8a; }
 .box img, .box video { width: 100%; height: 100%; object-fit: cover; }
 .box.big { grid-column: span 2; grid-row: span 2; }
 
+
 /* ── Collaboration Banner ── */
 .collab-banner {
     margin-top: 60px;
@@ -1287,9 +1288,10 @@ h1.section-title { color: #1e3a8a; }
  
 .collab-x {
     color: #f87171;
-    font-size: 42px;
-    margin: 0 14px;
-    vertical-align: middle;
+    font-size: 48px;
+    display: block;
+    line-height: 1.2;
+    margin: 6px 0;
 }
  
 .collab-divider {
@@ -1317,6 +1319,38 @@ h1.section-title { color: #1e3a8a; }
     display: block;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
 }
+
+/* ── Icon pills row ── */
+.collab-pills {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+ 
+.collab-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 12px 22px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+}
+ 
+.collab-pill i {
+    font-size: 18px;
+    color: #93c5fd;
+}
+
 
 
 

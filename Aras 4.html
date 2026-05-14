@@ -56,6 +56,7 @@
     <aside class="sidebar-list">
         <h3>INTERACTIVE ROOM DIRECTORY</h3>
         <div class="room-item-card active" data-id="Serambi Al-Quran">Serambi Al-Quran</div>
+		<div class="room-item-card" data-id="Iqra">Iqra Room</div>
     </aside>
 
 <section class="viewer-content">
@@ -81,6 +82,7 @@
 			
 		<div class="thumbnails-row">
 		<div class="thumb-card" data-id="Serambi Al-Quran"><img src="Projek\Thumbnail\Serambi Al-Quran.png"><p>Serambi Al-Quran</p></div>
+		<div class="thumb-card" data-id="Iqra"><img src="Projek\Thumbnail\Iqra Room.png"><p>Iqra Room</p></div>
 	</div>
 
 	
@@ -89,12 +91,12 @@
 </main>
 
  <script>
-    const roomData = {
+     const roomData = {
         'Serambi Al-Quran': { 
             title: 'Serambi Al-Quran',
             desc: '',
             isMulti: false,
-            video: 'https://www.youtube.com/embed/O7rfRlB6EHs?si=zwRRdyJjYR8rQ-1u',
+            video: 'Projek/Video/Serambi Al-Quran.mp4',
             image: 'Projek/Image/Serambi Al-Quran.jpg',
             infoCard: `<div class="ric-wrap">
   <span class="ric-badge">LEVEL 4</span>
@@ -114,8 +116,34 @@
   </div>
   <div class="ric-note">👟 <span>Please <strong>remove shoes</strong> before entering.</span></div>
 </div>`
+        },
+	        'Iqra': { 
+            title: "Iqra Room'",
+            desc: '',
+            isMulti: false,
+            video: 'Projek/Video/Iqra.mp4',
+            image: 'Projek/Image/Iqra.jpg',
+            infoCard: `<div class="ric-wrap">
+  <span class="ric-badge">LEVEL 4</span>
+  <div class="ric-title">Iqra' Room</div>
+  <div class="ric-cap-row">
+    <div class="ric-cap-icon">📚</div>
+    <div><div class="ric-cap-num">100</div><div class="ric-cap-label">rooms available across Level 4</div></div>
+  </div>
+  <hr class="ric-divider">
+  <p class="ric-desc">The Iqra' Room is a private study space ideal for focused, distraction-free learning. With 100 rooms starting with Room Iqra' 19 spread across Levels 4 and some rooms are equipped with network points and power sockets for added convenience. Available for rent at RM20 per month where can be bookings at the Circulation Counter on Level 1.</p>
+  <hr class="ric-divider">
+  <div class="ric-section-label">Facilities</div>
+  <div class="ric-facility-grid">
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-blue"></span>Study Desk & Chair</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Network Point (selected rooms)</div>
+    <div class="ric-fac no-filter"><span class="ric-dot ric-dot-green"></span>Power Socket (selected rooms)</div>
+  </div>
+  <div class="ric-note">💰 <span>Rental: <strong>RM20 / month</strong> — Book at Circulation Counter, Level 1.</span></div>
+</div>`
         }
-    };
+	};
+
 
     let viewer1 = null;
     let viewer2 = null;
@@ -262,15 +290,32 @@ function updateRoomView(id) {
 
 		// 3. Gabungkan semua dalam SATU window.onload
 		window.onload = () => {
-			// Detect bilik pertama secara dinamik berdasarkan item pertama dalam sidebar
-			const firstRoom = document.querySelector('.room-item-card').getAttribute('data-id');
-    
-			if (firstRoom) {
-				updateRoomView(firstRoom);
+			// Check URL param ?room=... dari Maps.html
+			const urlParams = new URLSearchParams(window.location.search);
+			const roomParam = urlParams.get('room');
+
+			// Kalau ada param dan bilik tu wujud dalam roomData, guna tu
+			// Kalau tak, guna bilik pertama dalam sidebar
+			let targetRoom = null;
+			if (roomParam && roomData[roomParam]) {
+				targetRoom = roomParam;
+			} else {
+				targetRoom = document.querySelector('.room-item-card').getAttribute('data-id');
 			}
-    
+
+			if (targetRoom) {
+				updateRoomView(targetRoom);
+			}
+
 			checkThumbnailCount();
 		};
+
+		// Event Listeners untuk klik
+		document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
+			item.addEventListener('click', function() {
+				updateRoomView(this.getAttribute('data-id'));
+			});
+		});
 
     // Hamburger Menu
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -296,13 +341,6 @@ function updateRoomView(id) {
             mobileNavMenu.classList.remove('open');
         }
     });
-
-		// Event Listeners untuk klik
-		document.querySelectorAll('.room-item-card, .thumb-card').forEach(item => {
-			item.addEventListener('click', function() {
-				updateRoomView(this.getAttribute('data-id'));
-			});
-		});
 </script>
    <footer>
         <div class="footer-main">

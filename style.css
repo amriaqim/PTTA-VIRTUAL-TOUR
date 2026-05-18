@@ -772,6 +772,8 @@ h3 {
 .ric-dot-red     { background: #ef4444; }
 .ric-dot-yellow  { background: #f59e0b; }
 .ric-dot-purple  { background: #8b5cf6; }
+.ric-dot-orange { background: #fb923c ; }
+
 
 .ric-rooms-grid {
     display: grid;
@@ -795,6 +797,10 @@ h3 {
 
 .ric-rn-comp { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
 .ric-rn-both { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.ric-rn-jap { background: #ffedd5; color: #f97316; border-color: #fdba74; }
+.ric-rn-win { background: #f3e8ff; color: #9333ea; border-color: #d8b4fe; }
+.ric-rn-winandjap { background: #fef9c3; color: #facc15; border-color: #fde047; }
+.ric-rn-whiteb { background: #fce7f3; color: #ec4899; border-color: #f9a8d4; }
 
 .ric-rn.unavailable {
     background: #f8fafc !important;

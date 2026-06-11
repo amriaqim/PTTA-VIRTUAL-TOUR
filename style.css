@@ -1107,6 +1107,7 @@ h1.section-title { color: #1e3a8a; }
 /* ── Ahli Team ── */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 0; }
 
 .member-card {
     background: white;
